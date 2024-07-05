@@ -296,10 +296,19 @@ return [
             'text'         => 'buscar',
             'topnav_right' => true,
         ],
+
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        [
+            'type' => 'darkmode-widget',
+             'icon-enabled' => 'fas fa-moon',
+             'icon-disabled' => 'fas fa-sun',
+             'color-enabled' => 'white',
+             'color-disabled' => 'yellow',
+            'topnav_right' => true,
+        ], 
 
         // Sidebar items:
         [
@@ -397,6 +406,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+        
     ],
 
     /*
