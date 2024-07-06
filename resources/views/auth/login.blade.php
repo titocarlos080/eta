@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - EtaHansRoth Institute</title>
+    <title>Login - EtaHansRoth </title>
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <style>
         body {
             background-color: #f5f5f5; /* Fondo gris claro para un aspecto más académico */
-            background-image: url('path/to/education-background.jpg'); /* Imagen de fondo educativa */
+            background-image: url('vendor/adminlte/dist/img/fondo_eta.png'); /* Imagen de fondo educativa */
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -41,7 +41,7 @@
 
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>EtaHansRoth</b> Institute</a>
+            <a href="#"><b>EtaHansRoth</b></a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
