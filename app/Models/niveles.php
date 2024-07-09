@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class niveles extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    public $timestamps = false;
+        protected $fillable = [
         'nombre',
     ];
     public function niveles()

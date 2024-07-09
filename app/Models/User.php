@@ -17,12 +17,41 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'usuarios';
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+       'name', 'email', 'password', 'password_reset', 'rol_id', 'tematica_id'
     ];
 
+
+
+    // Define the relationships
+    public function rol()
+    {
+        return $this->belongsTo(Role::class, 'rol_id', 'id');
+    }
+
+    public function tematica()
+    {
+        return $this->belongsTo(Tematica::class, 'tematica_id', 'id');
+    }
+
+    // Otros métodos y propiedades
+
+    public function estudiantes()
+    {
+        return $this->hasMany(Estudiante::class, 'usuario_id');
+    }
+
+    public function docentes()
+    {
+        return $this->hasMany(Docente::class, 'usuario_id');
+    }
+
+    public function administrativos()
+    {
+        return $this->hasMany(Administrativo::class, 'usuario_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

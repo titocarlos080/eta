@@ -17,6 +17,6 @@ class pagos extends Model
     ];
     public function estudiante()
     {
-        return $this->belongsTo(Estudiantes::class, 'estudiante_id');
+        return $this->belongsTo(Estudiante::class, 'estudiante_id');
     }
 }

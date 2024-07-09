@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\map;
+
 return [
 
     /*
@@ -232,7 +234,7 @@ return [
     |
     */
 
-    'right_sidebar' => false,
+    'right_sidebar' => true,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -288,9 +290,9 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-
+     
     'menu' => [
-        // Navbar items:
+         // Navbar items:
         [
             'type'         => 'navbar-search',
             'text'         => 'buscar',
@@ -320,6 +322,7 @@ return [
 
          
        
+        // Sidebar items:
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
@@ -393,7 +396,7 @@ return [
                 ],
             ],
         ],
-        
+       
     ],
 
     /*
@@ -416,7 +419,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
-        
+        App\Http\Filters\MenuFilter::class        
     ],
 
     /*
