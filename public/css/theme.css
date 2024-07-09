@@ -1,0 +1,55 @@
+
+
+/* Estilos para el tema jóvenes */
+.theme-teens body,
+.theme-teens .content-wrapper,
+.theme-teens .main-header,
+.theme-teens .main-sidebar,
+.theme-teens .main-footer,
+.theme-teens .card,
+.theme-teens .navbar,
+.theme-teens .sidebar,
+.theme-teens .table,
+.theme-teens .card-header,
+.theme-teens .card-body 
+.theme-teens .modal-header,
+.theme-teens .modal-body,
+.theme-teens .modal-footer
+{
+    background-color: #4caf50 !important; /* Verde vibrante */
+    color: #0f0101 !important; /* Texto negro */
+}
+
+.theme-teens .main-header .navbar,
+.theme-teens .main-sidebar,
+.theme-teens .main-footer {
+    background-color: #388e3c !important; /* Verde oscuro */
+    color: #0f0101 !important; /* Texto negro */
+}
+
+/* Estilos para el tema adultos */
+.theme-adults body,
+.theme-adults .content-wrapper,
+.theme-adults .main-header,
+.theme-adults .main-sidebar,
+.theme-adults .main-footer,
+.theme-adults .card,
+.theme-adults .navbar,
+.theme-adults .sidebar,
+.theme-adults .table,
+.theme-adults .card-header,
+.theme-adults .card-body
+.theme-adults .modal-content,
+.theme-adults .modal-header,
+.theme-adults .modal-body,
+.theme-adults .modal-footer{
+    background-color: #2196f3 !important; /* Azul profesional */
+    color: #0f0101 !important; /* Texto negro */
+}
+
+.theme-adults .main-header .navbar,
+.theme-adults .main-sidebar,
+.theme-adults .main-footer {
+    background-color: #1976d2 !important; /* Azul oscuro */
+    color: #0f0101 !important; /* Texto negro */
+}

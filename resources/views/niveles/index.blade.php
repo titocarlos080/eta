@@ -62,6 +62,7 @@
                                         <td>{{ $nivel->nombre }}</td>
                                         <td>
                                             <!-- Formulario de eliminación directamente en la tabla -->
+                                            <button type="button" class="btn btn-warning btn-sm" onclick="editNivel({{ $nivel->id }})">Editar</button>
                                             <form action="{{ route('niveles.destroy', $nivel->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -78,8 +79,21 @@
         </div>
 
     </section>
+    <!-- Incluir el formulario de edición -->
+@include('partials.niveles.form_edit')
 @stop
-
+<script>
+    function editNivel(id) {
+        fetch(`/niveles/${id}/edit`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('editNombre').value = data.nombre;
+                document.getElementById('editNivelForm').action = `/niveles/${id}`;
+                $('#formEditModal').modal('show');
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
 @section('js')
     <script>
         function confirmarEliminacion(nivelId) {
@@ -90,4 +104,11 @@
         }
     </script>
 @stop
+@push('scripts')
+<script src="{{ asset('js/theme.js') }}"></script>
+@endpush
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush
 

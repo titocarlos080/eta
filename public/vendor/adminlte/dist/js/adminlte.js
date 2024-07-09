@@ -1477,6 +1477,7 @@
         if (this._config.autoDarkMode) {
           $body.addClass('dark-mode');
         }
+    
       }
     };
 

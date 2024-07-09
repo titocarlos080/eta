@@ -63,9 +63,14 @@ class CarrerasController extends Controller
      * @param  \App\Models\carreras  $carreras
      * @return \Illuminate\Http\Response
      */
-    public function edit(carreras $carreras)
+    public function edit($id)
     {
-        //
+        $carrera = Carreras::with('niveles')->find($id);
+        $niveles = Niveles::all();
+        return response()->json([
+            'carrera' => $carrera,
+            'niveles' => $niveles
+        ]);
     }
 
     /**
@@ -75,9 +80,19 @@ class CarrerasController extends Controller
      * @param  \App\Models\carreras  $carreras
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, carreras $carreras)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'duracion' => 'required',
+            'niveles' => 'required|array',
+        ]);
+    
+        $carrera = Carreras::find($id);
+        $carrera->update($request->only(['nombre', 'duracion']));
+        $carrera->niveles()->sync($request->input('niveles'));
+    
+        return redirect()->route('carreras.index')->with('success', 'Carrera actualizada exitosamente.');
     }
 
     /**

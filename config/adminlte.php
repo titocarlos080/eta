@@ -309,7 +309,17 @@ return [
              'color-disabled' => 'yellow',
             'topnav_right' => true,
         ], 
+        [
+            'type' => 'link',
+            'text' => '',
+            'icon' => 'fas fa-child', // Icono por defecto para jóvenes
+            'url'  => '#',
+            'id' => 'theme-toggle',
+            'topnav_right' => true,
+        ],
 
+         
+       
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
@@ -492,7 +502,18 @@ return [
                 ],
             ],
         ],
+
+        'ThemeScript' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'js/theme.js',
+                ],
+            ],
     ],
+],
 
     /*
     |--------------------------------------------------------------------------

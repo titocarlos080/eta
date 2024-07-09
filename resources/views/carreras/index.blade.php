@@ -74,6 +74,7 @@
                                         
                                         <td>{{ $carrera->duracion }}</td>
                                         <td>
+                                            <button type="button" class="btn btn-warning btn-sm" onclick="editCarrera({{ $carrera->id }})">Editar</button>
                                             <!-- Formulario de eliminación directamente en la tabla -->
                                             <form action="{{ route('carreras.destroy', $carrera->id) }}" method="POST" class="d-inline">
                                                 @csrf
@@ -91,8 +92,36 @@
         </div>
 
     </section>
+    <!-- Incluir el formulario de edición -->
+@include('partials.carreras.form_edit')
 @stop
+<script>
+    function editCarrera(id) {
+        fetch(`/carreras/${id}/edit`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('editNombre').value = data.carrera.nombre;
+                document.getElementById('editDuracion').value = data.carrera.duracion;
 
+                const select = document.getElementById('editNiveles');
+                select.innerHTML = ''; // Clear existing options
+
+                data.niveles.forEach(nivel => {
+                    const option = document.createElement('option');
+                    option.value = nivel.id;
+                    option.textContent = nivel.nombre;
+                    if (data.carrera.niveles.some(carreraNivel => carreraNivel.id === nivel.id)) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+
+                document.getElementById('editCarreraForm').action = `/carreras/${id}`;
+                $('#formEditModal').modal('show');
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
 @section('js')
     <script>
         function confirmarEliminacion(carreraId) {
@@ -103,4 +132,10 @@
         }
     </script>
 @stop
+@push('scripts')
+<script src="{{ asset('js/theme.js') }}"></script>
+@endpush
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush

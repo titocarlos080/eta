@@ -59,9 +59,10 @@ class NivelesController extends Controller
      * @param  \App\Models\niveles  $niveles
      * @return \Illuminate\Http\Response
      */
-    public function edit(niveles $niveles)
+    public function edit($id)
     {
-        //
+        $nivel = Niveles::find($id);
+    return response()->json($nivel);
     }
 
     /**
@@ -71,9 +72,16 @@ class NivelesController extends Controller
      * @param  \App\Models\niveles  $niveles
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, niveles $niveles)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+        ]);
+    
+        $nivel = Niveles::find($id);
+        $nivel->update($request->all());
+    
+        return redirect()->route('niveles.index')->with('success', 'Nivel actualizado exitosamente.');
     }
 
     /**

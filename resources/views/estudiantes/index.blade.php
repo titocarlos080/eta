@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'estudiantes')
+@section('title', 'Estudiantes')
 
 @section('content')
 <section class="content">
@@ -38,11 +38,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="card-body p-0">
-
                 <table class="table table-hover table-head-fixed">
                     <thead class="table-light ">
                         <tr>
@@ -52,11 +49,8 @@
                             <th>CARNET <br>IDENTIDAD</th>
                             <th>CARRERA-NIVEL</th>
                             <th>OPCIONES</th>
-
                         </tr>
                     </thead>
-
-
                     <tbody>
                         @foreach($estudiantes as $estudiante)
                         <tr>
@@ -73,8 +67,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button type="button" class="btn btn-warning btn-sm">Editar</button>
-                                <!-- Formulario de eliminación directamente en la tabla -->
+                                <button type="button" class="btn btn-warning btn-sm" onclick="editEstudiante({{ $estudiante->id }})">Editar</button>
                                 <form action="{{ route('estudiantes.destroy', $estudiante->id) }}" method="POST"
                                     class="d-inline">
                                     @csrf
@@ -82,27 +75,53 @@
                                     <button type="submit" class="btn btn-danger btn-sm"
                                         onclick="return confirm('¿Estás seguro de que deseas eliminar este estudiante?')">Eliminar</button>
                                 </form>
-                                
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
-
 </section>
+<!-- Incluir el formulario de edición -->
+@include('partials.estudiantes.form_edit')
 @stop
-
-@section('js')
 <script>
-    function confirmarEliminacion(estudianteId) {
-            if (confirm('¿Estás seguro de que deseas eliminar esta carrera?')) {
-                // Si el usuario hace clic en "Aceptar", redirige al controlador para eliminar el nivel
-                window.location.href = '{{ url("estudiantes") }}/' + carreraId;
-            }
-        }
+    function editEstudiante(id) {
+        fetch(`/estudiantes/${id}/edit`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('editNombre').value = data.estudiante.nombre;
+                document.getElementById('editApellidos').value = data.estudiante.apellidos;
+                document.getElementById('editCarnet').value = data.estudiante.carnet;
+
+                const select = document.getElementById('editCarreraNivel');
+                select.innerHTML = ''; // Limpiar opciones existentes
+
+                data.carreras.forEach(carrera => {
+                    const option = document.createElement('option');
+                    option.value = carrera.id;
+                    option.textContent = `${carrera.nombre} - ${carrera.niveles.map(nivel => nivel.nombre).join(', ')}`;
+                    if (data.estudiante.carrera_nivel == carrera.id) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+
+                document.getElementById('editEstudianteForm').action = `/estudiantes/${id}`;
+                $('#formEditModal').modal('show');
+            })
+            .catch(error => console.error('Error:', error));
+    }
 </script>
-@stop
+
+@push('scripts')
+<script src="{{ asset('js/theme.js') }}"></script>
+
+@endpush
+
+@push('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush

@@ -90,9 +90,14 @@ class EstudiantesController extends Controller
      * @param  \App\Models\Estudiantes  $estudiantes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Estudiantes $estudiantes)
+    public function edit($id)
     {
-        //
+        $estudiante = Estudiantes::with('carreras.niveles')->find($id);
+        $carreras = Carreras::with('niveles')->get();
+            return response()->json([
+            'estudiante' => $estudiante,
+            'carreras' => $carreras
+         ]);
     }
 
     /**
@@ -102,9 +107,20 @@ class EstudiantesController extends Controller
      * @param  \App\Models\Estudiantes  $estudiantes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudiantes $estudiantes)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'carnet' => 'required',
+            'carrera_nivel' => 'required',
+        ]);
+
+        $estudiante = Estudiantes::find($id);
+        $estudiante->update($request->only(['nombre', 'apellidos', 'carnet', 'carrera_nivel']));
+        $estudiante->carreras()->sync($request->input('carrera_nivel'));
+
+        return redirect()->route('estudiantes.index')->with('success', 'Estudiante actualizado exitosamente.');
     }
 
     /**
