@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\map;
+
 return [
 
     /*
@@ -232,7 +234,7 @@ return [
     |
     */
 
-    'right_sidebar' => false,
+    'right_sidebar' => true,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -288,9 +290,9 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-
+     
     'menu' => [
-        // Navbar items:
+         // Navbar items:
         [
             'type'         => 'navbar-search',
             'text'         => 'buscar',
@@ -315,75 +317,21 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'buscar',
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        ['header' => 'MENU'],
-        [
-            'text' => 'CONFIGURACIONES',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fas fa-cog',
-        ],
-        [
-            'text' => 'ESTUDIANTES',
-            'url'  => 'estudiantes/',
-            'icon' => 'fas fa-fw fa-user-plus',
+        function () {
+            $menuItems = [];
 
-            
-        ],
-        [
-            'text'    => 'CARRERAS',
-            'icon'    => 'fas fa-fw far fa-newspaper',
-            'submenu' => [
-                [
-                    'text' => 'NUEVA CARRERA',
-                    'url'  => 'carreras/',
-                    'icon' => 'fas fa-fw fa-long-arrow-alt-right',
-                ],
-                [
-                    'text' => 'NIVELES',
-                    'url'  => 'niveles/',
-                    'icon' => 'fas fa-fw fa-long-arrow-alt-right',
-                ],
-            ],
-        ],
+            $menus = \App\Models\Menu::all();
+            foreach ($menus as $menu) {
+                $menuItems[] = [
+                    'text' => strtoupper($menu->nombre),
+                    'url' => $menu->ruta,
+                    'icon' => 'fas fa-fw fa-link', // Puedes personalizar los iconos según sea necesario
+                ];
+            }
 
-        [
-            'text'    => 'PAGOS',
-            'icon'    => 'fas fa-fwfas fa-money-bill-alt',
-            'submenu' => [
-                [
-                    'text'    => 'NUEVO PAGO',
-                    'url'     => 'pagos',
-                    'icon'    => 'fas fa-fw fas fa-hand-holding-usd'
-                ],
-                [
-                    'text' => 'INGRESOS',
-                    'url'  => 'pagos/lista',
-                    'icon' => 'fas fa-fw fas fa-file-invoice-dollar'
-                ],
-                [
-                    'text'    => 'EGRESOS',
-                    'url'     => '#',
-                    'icon'    => 'fas fa-fw fas fa-wallet'
-                ],
-                
-            ],
-        ],
-        [
-            'text'    => 'REGISTROS PAGOS',
-            'icon'    => 'fas fa-fw far fa-newspaper',
-            'submenu' => [
-                [
-                    'text' => 'LISTA',
-                    'url'  => 'carreras/',
-                    'icon' => 'fas fa-fw fas fa-align-justify',
-                ],
-            ],
-        ],
-        
+            return $menuItems;
+        },
+       
     ],
 
     /*
@@ -406,7 +354,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
-        
+        App\Http\Filters\MenuFilter::class        
     ],
 
     /*

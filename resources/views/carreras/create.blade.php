@@ -1,47 +1,31 @@
-<form action="{{ route('carreras.store') }}" method="post">
-    @csrf
-    <div class="row">
-        <div class="col-md-9">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Carrera</title>
+ </head>
+<body>
+    <div class="container">
+        <h1>Crear Carrera</h1>
+        <form action="{{ route('carreras.store') }}" method="POST">
+            @csrf
             <div class="form-group">
-                <label for="nombre">NOMBRE</label>
-                <input type="text" name="nombre" class="form-control my-colorpicker1" value="{{ old('nombre') }}"
-                    required>
-
-                @error('nombre')
-                <small class="text-danger">*{{ $message }}</small>
-                @enderror
+                <label for="sigla">Sigla</label>
+                <input type="text" name="sigla" id="sigla" class="form-control" required>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="nivel">Nivelwd</label>
-                    <select name="nivel_id" class="form-control select2" style="width: 100%;">
-                        @foreach ($niveles as $nivel)
-                            <option value="{{ $nivel->id }}">
-                                {{ $nivel->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-
             <div class="form-group">
-                <label for="duracion">DURACION</label>
-                <input type="text" name="duracion" class="form-control my-colorpicker1" value="{{ old('duracion') }}"
-                    required>
-
-                @error('duracion')
-                <small class="text-danger">*{{ $message }}</small>
-                @enderror
+                <label for="descripcion">Descripción</label>
+                <input type="text" name="descripcion" id="descripcion" class="form-control" required>
             </div>
-
-        </div>
+            <div class="form-group">
+                <label for="gestion_codigo">Gestión</label>
+                <select name="gestion_codigo" id="gestion_codigo" class="form-control" required>
+                    @foreach ($gestiones as $gestion)
+                        <option value="{{ $gestion->codigo }}">{{ $gestion->descripcion }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
     </div>
-
-    <hr>
-    <div class="d-flex justify-content-end">
-        <a type="button" class="btn btn-danger mr-2" href="{{ route('carreras.index') }}">Hey</a>
-        <button type="submit" class="btn btn-info">GuardarSI</a>
-    </div>
-
-</form>
+</body>
+</html>
