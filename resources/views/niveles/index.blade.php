@@ -62,7 +62,7 @@
                                         <td>{{ $nivel->nombre }}</td>
                                         <td>
                                             <!-- Formulario de eliminación directamente en la tabla -->
-                                            <button type="button" class="btn btn-warning btn-sm" onclick="editNivel({{ $nivel->$nivel_id }})">Editar</button>
+                                            <button type="button" class="btn btn-warning btn-sm" onclick="editNivel('{{ $nivel->id }}')">Editar</button>
                                             <form action="{{ route('niveles.destroy', $nivel->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
