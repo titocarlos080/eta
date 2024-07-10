@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Dispatcher  $events)
+    public function boot(Dispatcher $events)
     {
         Paginator::useBootstrap();
 
