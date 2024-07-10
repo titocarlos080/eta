@@ -12,7 +12,7 @@ class Menu extends Model
     protected $table = 'menus';
 
     // Campos que son asignables en masa
-    protected $fillable = ['nombre', 'ruta'];
+    protected $fillable = ['nombre', 'ruta','icon'];
 
     // Si el nombre de la clave primaria no es 'id', defínelo aquí
     protected $primaryKey = 'id';

@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 class EstudianteController extends Controller
 {
     public function index()
-    {
-        $estudiantes = Estudiante::with('usuario')->get();
-        return view('estudiantes.index', compact('estudiantes'));
+    {        $usuarios = User::all();
+
+        $estudiantes = Estudiante::all();
+         return view('estudiantes.index', compact('estudiantes'),compact('usuarios'));
     }
 
     public function create()

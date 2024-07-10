@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Estudiante</title>
-</head>
-<body>
-    <h1>Editar Estudiante</h1>
+ 
     <form action="{{ route('estudiantes.update', $estudiante->ci) }}" method="POST">
         @csrf
         @method('PUT')
@@ -45,7 +37,6 @@
         </select>
         <br>
         <button type="submit">Actualizar</button>
+        <a href="{{ route('estudiantes.index') }}">Regresar</a>
     </form>
-    <a href="{{ route('estudiantes.index') }}">Regresar</a>
-</body>
-</html>
+ 

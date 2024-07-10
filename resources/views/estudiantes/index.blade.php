@@ -20,8 +20,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <!-- Aquí va el contenido de la tarjeta -->
-                    <a href="{{ route('estudiantes.create') }}" class="btn btn-primary mb-3">Crear Nuevo Estudiante</a>
+                    <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#createEstudianteModal">Crear Nuevo Estudiante</button>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -50,15 +49,69 @@
                                     <td>{{ $estudiante->fecha_nacimiento }}</td>
                                     <td>{{ $estudiante->usuario->email }}</td>
                                     <td>
-                                        <a href="{{ route('estudiantes.show', $estudiante->ci) }}" class="btn btn-info btn-sm">Ver</a>
-                                        <a href="{{ route('estudiantes.edit', $estudiante->ci) }}" class="btn btn-warning btn-sm">Editar</a>
-                                        <form action="{{ route('estudiantes.destroy', $estudiante->ci) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </form>
+                                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewEstudianteModal-{{ $estudiante->ci }}">Ver</button>
+                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editEstudianteModal-{{ $estudiante->ci }}">Editar</button>
+                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteEstudianteModal-{{ $estudiante->ci }}">Eliminar</button>
                                     </td>
                                 </tr>
+                                
+                                <!-- Modal Ver Estudiante -->
+                                <div class="modal fade" id="viewEstudianteModal-{{ $estudiante->ci }}" tabindex="-1" role="dialog" aria-labelledby="viewEstudianteLabel-{{ $estudiante->ci }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="viewEstudianteLabel-{{ $estudiante->ci }}">Ver Estudiante</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Contenido del modal para ver el estudiante -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Editar Estudiante -->
+                                <div class="modal fade" id="editEstudianteModal-{{ $estudiante->ci }}" tabindex="-1" role="dialog" aria-labelledby="editEstudianteLabel-{{ $estudiante->ci }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editEstudianteLabel-{{ $estudiante->ci }}">Editar Estudiante</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Incluir el formulario de edición -->
+                                                @include('estudiantes.edit', ['estudiante' => $estudiante])
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Eliminar Estudiante -->
+                                <div class="modal fade" id="deleteEstudianteModal-{{ $estudiante->ci }}" tabindex="-1" role="dialog" aria-labelledby="deleteEstudianteLabel-{{ $estudiante->ci }}" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteEstudianteLabel-{{ $estudiante->ci }}">Eliminar Estudiante</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="{{ route('estudiantes.destroy', $estudiante->ci) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <p>¿Estás seguro de que deseas eliminar este estudiante?</p>
+                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -66,6 +119,24 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal Crear Estudiante -->
+    <div class="modal fade" id="createEstudianteModal" tabindex="-1" role="dialog" aria-labelledby="createEstudianteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createEstudianteLabel">Crear Nuevo Estudiante</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Incluir el formulario de creación -->
+                    @include('estudiantes.create')
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')

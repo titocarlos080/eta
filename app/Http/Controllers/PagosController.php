@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\carreras;
+use App\Models\Estudiante;
 use App\Models\Estudiantes;
 use App\Models\niveles;
 use App\Models\pagos;
@@ -31,7 +32,7 @@ class PagosController extends Controller
     public function lista()
     {
         $pagos=pagos::all();
-        $estudiantes = Estudiantes::with ('carreras')->orderBy('id', 'asc')->paginate(9);
+        $estudiantes = Estudiante::with ('carreras')->orderBy('id', 'asc')->paginate(9);
         $carreras=Carreras::all();
         $carreras = Carreras::with('niveles')->get();
         return view('pagos.lista',compact('pagos','estudiantes','carreras'));
@@ -42,7 +43,7 @@ class PagosController extends Controller
         
         if($request->ajax()){
  
-            $data=Estudiantes::where('id','like','%'.$request->search.'%')
+            $data=Estudiante::where('id','like','%'.$request->search.'%')
             ->orwhere('nombre','like','%'.$request->search.'%')
             ->orwhere('apellidos','like','%'.$request->search.'%')->get();
             
@@ -54,7 +55,7 @@ class PagosController extends Controller
 
     public function getEstudianteInfo($id)
     {
-        $estudiante = Estudiantes::find($id);
+        $estudiante = Estudiante::find($id);
         
         if (!$estudiante) {
             return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
