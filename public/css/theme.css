@@ -43,13 +43,40 @@
 .theme-adults .modal-header,
 .theme-adults .modal-body,
 .theme-adults .modal-footer{
-    background-color: #2196f3 !important; /* Azul profesional */
+    background-color: #afad7d !important; /* Azul profesional */
     color: #0f0101 !important; /* Texto negro */
 }
 
 .theme-adults .main-header .navbar,
 .theme-adults .main-sidebar,
 .theme-adults .main-footer {
-    background-color: #1976d2 !important; /* Azul oscuro */
+    background-color: #afad7d !important; /* Azul oscuro */
     color: #0f0101 !important; /* Texto negro */
 }
+
+/* Estilos para el tema de niños */
+.theme-kids body,
+.theme-kids .content-wrapper,
+.theme-kids .main-header,
+.theme-kids .main-sidebar,
+.theme-kids .main-footer,
+.theme-kids .card,
+.theme-kids .navbar,
+.theme-kids .sidebar,
+.theme-kids .table,
+.theme-kids .card-header,
+.theme-kids .card-body,
+.theme-kids .modal-header,
+.theme-kids .modal-body,
+.theme-kids .modal-footer {
+    background-color: #e8e820 !important; /* Amarillo brillante */
+    color: #000000 !important; /* Texto negro */
+}
+
+.theme-kids .main-header .navbar,
+.theme-kids .main-sidebar,
+.theme-kids .main-footer {
+    background-color: #f1bf62 !important; /* Naranja */
+    color: #000000 !important; /* Texto negro */
+}
+

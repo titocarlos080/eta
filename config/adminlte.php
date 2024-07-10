@@ -317,6 +317,14 @@ return [
             'id' => 'theme-toggle',
             'topnav_right' => true,
         ],
+        [
+            'type' => 'link',
+            'text' => '',
+            'icon' => 'fas fa-volleyball-ball', // Icono para niños
+            'url'  => '#',
+            'id' => 'theme-toggle-kids',
+            'topnav_right' => true,
+        ],
 
          
        

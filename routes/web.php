@@ -18,7 +18,9 @@ use App\Http\Controllers\PagosController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
 Route::get('/', [HomeController::class, 'index'])->name('login');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);

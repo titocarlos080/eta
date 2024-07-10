@@ -129,8 +129,20 @@ class EstudiantesController extends Controller
      * @param  \App\Models\Estudiantes  $estudiantes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudiantes $estudiantes)
+    public function destroy($id)
     {
-        //
+        // Buscar el estudiante por su ID
+        $estudiante = Estudiantes::find($id);
+
+        // Verificar si el estudiante existe
+        if (!$estudiante) {
+            return redirect()->route('estudiantes.index')->with('error', 'Estudiante no encontrado');
+        }
+
+        // Eliminar el estudiante
+        $estudiante->delete();
+
+        // Redireccionar a la vista de index con un mensaje de éxito
+        return redirect()->route('estudiantes.index')->with('success', 'Estudiante eliminado correctamente');
     }
 }

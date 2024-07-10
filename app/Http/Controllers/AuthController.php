@@ -14,7 +14,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Autenticación exitosa
-            return redirect()->intended('admin/dashboard');
+          //  return redirect()->intended('admin/dashboard');
+          return redirect()->intended('/welcome');
         }
 
         // Autenticación fallida
