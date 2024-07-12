@@ -38,6 +38,15 @@ class DatabaseSeeder extends Seeder
                 'tematica_id' => 2, // Asegúrate de que esta temática exista
                 
             ],
+            [
+                'name' => 'Veronica Antezana',
+                'email' => 'vero@gmail.com',
+                'password' => Hash::make('1234'),
+                'password_reset' => null,
+                'rol_id' => 1, // Asegúrate de que este rol exista
+                'tematica_id' => 2, // Asegúrate de que esta temática exista
+                
+            ],
             // Agrega más usuarios según sea necesario
         ]);
      }
