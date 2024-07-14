@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\niveles;
-
 use Illuminate\Http\Request;
+
+ 
 
 class NivelesController extends Controller
 {
@@ -15,6 +16,7 @@ class NivelesController extends Controller
      */
     public function index()
     {
+        dd("Hols");
         $niveles= Niveles::orderby('id', 'asc')->paginate(9);
         return view('niveles.index',compact('niveles'));
     }
@@ -26,6 +28,8 @@ class NivelesController extends Controller
      */
     public function create()
     {
+  
+        
         $niveles = niveles::get();
         return view('niveles.create',compact('niveles'));
     }

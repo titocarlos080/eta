@@ -188,5 +188,14 @@ class PagosController extends Controller
         //
     }
 
+    public function prueba()
+    {
+        return view("pagos.prueba");
+        //
+    }
+
+
+
+
     
 }

@@ -20,4 +20,10 @@ class Role extends Model
      {
          return $this->hasMany(User::class, 'rol_id');
      }
+
+     
+    public function menus()
+    {
+        return $this->hasMany(RoleMenu::class, 'rol_id');
+    }
 }

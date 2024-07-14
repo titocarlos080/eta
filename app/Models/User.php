@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     // Otros métodos y propiedades
 
-    public function estudiantes()
+  public function estudiantes()
     {
         return $this->hasMany(Estudiante::class, 'usuario_id');
     }
@@ -52,11 +52,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Administrativo::class, 'usuario_id');
     }
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    
+    public function adminlte_image()
+    {
+        return asset('vendor/adminlte/dist/img/profile-user.png');
+    }
+     
+
+
+    
     protected $hidden = [
         'password',
         'remember_token',

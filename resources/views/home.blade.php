@@ -10,10 +10,10 @@
     <p>BIENVENIDOS A ETA HANS ROTH FE Y ALEGRIA</p>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+@push('scripts')
+<script src="{{ asset('js/theme.js') }}"></script>
+@endpush
 
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush
