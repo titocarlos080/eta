@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gestion extends Model
 {
     use HasFactory;
-    use HasFactory;
-
+ 
     protected $table = 'gestiones';
 
     protected $primaryKey = 'codigo';
@@ -24,4 +23,5 @@ class Gestion extends Model
     {
         return $this->hasMany(Carrera::class, 'gestion_codigo', 'codigo');
     }
+    
 }

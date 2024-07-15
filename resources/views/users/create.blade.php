@@ -1,39 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Usuario</title>
-</head>
-<body>
-    <h1>Crear Usuario</h1>
-    <form action="{{ route('users.store') }}" method="POST">
-        @csrf
-        <label for="name">Nombre:</label>
-        <input type="name" name="name" id="name" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
-        <br>
-        <label for="password">Contraseña:</label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <label for="rol_id">Rol:</label>
-        <select name="rol_id" id="rol_id" required>
-            @foreach($roles as $rol)
-                <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+<form action="{{ route('usuarios.store') }}" method="POST">
+    @csrf
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre:</label>
+        <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+        @error('name')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+        @error('email')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Contraseña:</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+        @error('password')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="mb-3">
+        <label for="rol_id" class="form-label">Rol:</label>
+        <select name="rol_id" id="rol_id" class="form-select form-control" required>
+            @foreach ($roles as $rol)
+                <option value="{{ $rol->id }}" {{ old('rol_id') == $rol->id ? 'selected' : '' }}>
+                    {{ $rol->nombre }}
+                </option>
             @endforeach
         </select>
-        <br>
-        <label for="tematica_id">Temática:</label>
-        <select name="tematica_id" id="tematica_id" required>
-            @foreach($tematicas as $tematica)
-                <option value="{{ $tematica->id }}">{{ $tematica->nombre }}</option>
-            @endforeach
-        </select>
-        <br>
-        <button type="submit">Guardar</button>
-    </form>
-    <a href="{{ route('users.index') }}">Regresar</a>
-</body>
-</html>
+        @error('rol_id')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <hr>
+    <div class="d-flex justify-content-end">
+        <a href="{{ route('usuarios.index') }}" class="btn btn-danger mr-2">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+</form>

@@ -8,14 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
-    // Nombre de la tabla en la base de datos
+
     protected $table = 'menus';
 
-    // Campos que son asignables en masa
-    protected $fillable = ['nombre', 'ruta','icon'];
+    protected $fillable = ['name', 'url', 'icon', 'parent_id', 'order']; 
 
-    // Si el nombre de la clave primaria no es 'id', defínelo aquí
-    protected $primaryKey = 'id';
-    public $incrementing = true;
-    protected $keyType = 'int';
+
+    // Relationship for sub-menus
+    public function submenus()
+    {
+        return $this->hasMany(Menu::class, 'parent_id')->orderBy('order'); 
+    }
+
+    // Optional: Relationship for parent menu (if needed)
+    public function parent()
+    {
+        return $this->belongsTo(Menu::class, 'parent_id');
+    }
+    public function roles()
+    {
+        return $this->hasMany(RoleMenu::class, 'menu_id');
+    }
+
 }

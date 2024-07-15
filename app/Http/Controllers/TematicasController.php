@@ -11,7 +11,7 @@ class TematicasController extends Controller
     // Muestra una lista de todos los recursos
     public function index()
     {
-        $tematicas = Tematicas::all();
+        $tematicas = Tematica::all();
         return view('tematicas.index', compact('tematicas'));
     }
 
@@ -28,25 +28,25 @@ class TematicasController extends Controller
             'nombre' => 'required|unique:tematicas|max:255',
         ]);
 
-        Tematicas::create($request->all());
+        Tematica::create($request->all());
         return redirect()->route('tematicas.index')
                          ->with('success', 'Tematica creada exitosamente.');
     }
 
     // Muestra el recurso especificado
-    public function show(Tematicas $tematica)
+    public function show(Tematica $tematica)
     {
         return view('tematicas.show', compact('tematica'));
     }
 
     // Muestra el formulario para editar el recurso especificado
-    public function edit(Tematicas $tematica)
+    public function edit(Tematica $tematica)
     {
         return view('tematicas.edit', compact('tematica'));
     }
 
     // Actualiza el recurso especificado en la base de datos
-    public function update(Request $request, Tematicas $tematica)
+    public function update(Request $request, Tematica $tematica)
     {
         $request->validate([
             'nombre' => 'required|unique:tematicas,nombre,' . $tematica->id . '|max:255',
@@ -58,7 +58,7 @@ class TematicasController extends Controller
     }
 
     // Elimina el recurso especificado de la base de datos
-    public function destroy(Tematicas $tematica)
+    public function destroy(Tematica $tematica)
     {
         $tematica->delete();
         return redirect()->route('tematicas.index')

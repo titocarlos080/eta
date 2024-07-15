@@ -41,7 +41,7 @@
 .theme-adults .card-body
 .theme-adults .modal-content,
 .theme-adults .modal-header,
-.theme-adults .modal-body,
+.theme-adults .modal-body,.nav-link  
 .theme-adults .modal-footer{
     background-color: #afad7d !important; /* Azul profesional */
     color: #0f0101 !important; /* Texto negro */
@@ -67,13 +67,16 @@
 .theme-kids .card-header,
 .theme-kids .card-body,
 .theme-kids .modal-header,
-.theme-kids .modal-body,
+.theme-kids .modal-body,.nav-link  
 .theme-kids .modal-footer {
     background-color: #e8e820 !important; /* Amarillo brillante */
     color: #000000 !important; /* Texto negro */
+    font-family: 'Courier New', Courier, monospace;
+
+    font-size: large;
 }
 
-.theme-kids .main-header .navbar,
+.theme-kids .main-header .navbar,.nav-link  
 .theme-kids .main-sidebar,
 .theme-kids .main-footer {
     background-color: #f1bf62 !important; /* Naranja */

@@ -15,7 +15,7 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('estudiante_id')->references('id')->on('estudiantes')->onDelete('cascade');
+            $table->string('estudiante_ci')->references('ci')->on('estudiantes')->onDelete('cascade');
             $table->string('concepto');
             $table->dateTime('fecha');
             $table->integer('monto');

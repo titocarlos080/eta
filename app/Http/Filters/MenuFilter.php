@@ -9,9 +9,9 @@ class MenuFilter implements FilterInterface
 {
     public function transform($item)
     {
-        if (isset($item['permission']) && ! Laratrust::isAbleTo($item['permission'])) {
-            $item['restricted'] = true;
-        }
+        // if (isset($item['permission']) && ! Laratrust::isAbleTo($item['permission'])) {
+        //     $item['restricted'] = true;
+        // }
 
         return $item;
     }

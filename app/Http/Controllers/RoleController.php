@@ -15,48 +15,32 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('roles.create');
+        // Return view if needed
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|unique:roles|max:255',
-        ]);
-
-        Role::create($request->all());
-
-        return redirect()->route('roles.index')
-                         ->with('success', 'Rol creado exitosamente.');
+        $role = Role::create($request->all());
+        return redirect()->route('roles.index');
     }
 
-    public function show(Role $role)
+    public function edit($id)
     {
-        return view('roles.show', compact('role'));
+        $role = Role::findOrFail($id);
+         return response()->json($role);
+      
     }
 
-    public function edit(Role $role)
+    public function update(Request $request, $id)
     {
-        return view('roles.edit', compact('role'));
-    }
-
-    public function update(Request $request, Role $role)
-    {
-        $request->validate([
-            'nombre' => 'required|max:255|unique:roles,nombre,' . $role->id,
-        ]);
-
+        $role = Role::findOrFail($id);
         $role->update($request->all());
-
-        return redirect()->route('roles.index')
-                         ->with('success', 'Rol actualizado exitosamente.');
+        return redirect()->route('roles.index');
     }
 
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        $role->delete();
-
-        return redirect()->route('roles.index')
-                         ->with('success', 'Rol eliminado exitosamente.');
+        Role::destroy($id);
+        return redirect()->route('roles.index');
     }
 }

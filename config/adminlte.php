@@ -32,8 +32,8 @@ return [
     |
     */
 
-    'use_ico_only' => false,
-    'use_full_favicon' => false,
+    'use_ico_only' => true,
+    'use_full_favicon' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'Auth Logo',
@@ -132,9 +132,10 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_header' => true,
+    'usermenu_header_class' => ' ',
+    'usermenu_image' => true,
+    'usermenu_name' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -169,7 +170,7 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_card' => ' ',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
@@ -214,9 +215,9 @@ return [
 
     'sidebar_mini' => 'lg',
     'sidebar_collapse' => true,
-    'sidebar_collapse_auto_size' => false,
+    'sidebar_collapse_auto_size' => true,
     'sidebar_collapse_remember' => false,
-    'sidebar_collapse_remember_no_transition' => true,
+    'sidebar_collapse_remember_no_transition' => false,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
@@ -234,7 +235,7 @@ return [
     |
     */
 
-    'right_sidebar' => true,
+    'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -291,7 +292,8 @@ return [
     |
     */
      
-    'menu' => [
+    'menu' => 
+    [
          // Navbar items:
         [
             'type'         => 'navbar-search',
@@ -327,94 +329,7 @@ return [
             'id' => 'theme-toggle-kids',
             'topnav_right' => true,
         ],
-
-         
-       
-        // Sidebar items:
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'buscar',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        ['header' => 'MENU'],
-        [
-            'text' => 'CONFIGURACIONES',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fas fa-cog',
-        ],
-        [
-            'text' => 'ESTUDIANTES',
-            'url'  => 'estudiantes/',
-            'icon' => 'fas fa-fw fa-user-plus',
-
-            
-        ],
-        [
-            'text'    => 'CARRERAS',
-            'icon'    => 'fas fa-fw far fa-newspaper',
-            'submenu' => [
-                [
-                    'text' => 'NUEVA CARRERA',
-                    'url'  => 'carreras/',
-                    'icon' => 'fas fa-fw fa-long-arrow-alt-right',
-                ],
-                [
-                    'text' => 'NIVELES',
-                    'url'  => 'niveles/',
-                    'icon' => 'fas fa-fw fa-long-arrow-alt-right',
-                ],
-            ],
-        ],
-
-        [
-            'text'    => 'PAGOS',
-            'icon'    => 'fas fa-fwfas fa-money-bill-alt',
-            'submenu' => [
-                [
-                    'text'    => 'NUEVO PAGO',
-                    'url'     => 'pagos',
-                    'icon'    => 'fas fa-fw fas fa-hand-holding-usd'
-                ],
-                [
-                    'text' => 'INGRESOS',
-                    'url'  => 'pagos/lista',
-                    'icon' => 'fas fa-fw fas fa-file-invoice-dollar'
-                ],
-                [
-                    'text'    => 'EGRESOS',
-                    'url'     => '#',
-                    'icon'    => 'fas fa-fw fas fa-wallet'
-                ],
-                
-            ],
-        ],
-        [
-            'text'    => 'REGISTROS PAGOS',
-            'icon'    => 'fas fa-fw far fa-newspaper',
-            'submenu' => [
-                [
-                    'text' => 'LISTA',
-                    'url'  => 'carreras/',
-                    'icon' => 'fas fa-fw fas fa-align-justify',
-                ],
-            ],
-        ],
-        [
-            'text'    => 'ESTADISTICAS',
-            'icon'    => 'fas fa-fw far fa-newspaper',
-            'submenu' => [
-                [
-                    'text' => 'LISTA',
-                    'url'  => 'carreras/',
-                    'icon' => 'fas fa-fw fas fa-align-justify',
-                ],
-            ],
-        ],
+ 
        
     ],
 

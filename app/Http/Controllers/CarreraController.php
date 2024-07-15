@@ -11,13 +11,15 @@ class CarreraController extends Controller
     public function index()
     {
         $carreras = Carrera::all();
-        return view('carreras.index', compact('carreras'));
+        $gestiones = Gestion::all(); // Obtén todas las gestiones
+        return view('carreras.index', compact('carreras', 'gestiones'));
     }
 
     public function create()
     {
-        $gestiones = Gestion::all(); // Para el dropdown de gestiones
-        return view('carreras.create', compact('gestiones'));
+        $carreras = Carrera::all();
+        $gestiones = Gestion::all(); // Obtén todas las gestiones
+        return view('carreras.index', compact('carreras', 'gestiones'));
     }
 
     public function store(Request $request)
@@ -38,10 +40,10 @@ class CarreraController extends Controller
         return view('carreras.show', compact('carrera'));
     }
 
-    public function edit(Carrera $carrera)
+    public function edit($codigo)
     {
-        $gestiones = Gestion::all(); // Para el dropdown de gestiones
-        return view('carreras.edit', compact('carrera', 'gestiones'));
+        $carrera = Carrera::find($codigo);
+        return response()->json($carrera);
     }
 
     public function update(Request $request, Carrera $carrera)

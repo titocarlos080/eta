@@ -11,6 +11,7 @@ class Carrera extends Model
     protected $table = 'carreras';
 
     protected $primaryKey = 'sigla';
+    protected $keyType = 'string'; 
 
     public $incrementing = false; // La clave primaria no es autoincremental
 

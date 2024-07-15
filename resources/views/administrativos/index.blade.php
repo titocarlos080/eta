@@ -1,61 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrativos</title>
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-</head>
-<body>
-<div class="container mt-5">
-    <h1>Lista de Administrativos</h1>
-    <a href="{{ route('administrativos.create') }}" class="btn btn-primary mb-3">Agregar Administrativo</a>
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+@extends('adminlte::page')
+
+@section('title', 'Administrativos')
+
+@section('content')
+<section class="content">
+    <div class="container-fluid p-4">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="card-title"><strong>LISTA DE ADMINISTRATIVOS</strong></h3>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="{{ route('administrativos.create') }}" class="btn btn-primary">Nuevo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover table-head-fixed">
+                    <thead class="table-light">
+                        <tr>
+                            <th>CI</th>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Email</th>
+                            <th>Sexo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($administrativos as $administrativo)
+                        <tr>
+                            <td>{{ $administrativo->ci }}</td>
+                            <td>{{ $administrativo->nombre }}</td>
+                            <td>{{ $administrativo->apellido_pat }}</td>
+                            <td>{{ $administrativo->email }}</td>
+                            <td>{{ $administrativo->sexo }}</td>
+                            <td>
+                                <!-- Botón Ver -->
+                                <a href="{{ route('administrativos.show', $administrativo->ci) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+
+                                <!-- Botón Editar -->
+                                <a href="{{ route('administrativos.edit', $administrativo->ci) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+                                <!-- Botón Eliminar -->
+                                <form action="{{ route('administrativos.destroy', $administrativo->ci) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este administrativo?')" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    @endif
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>CI</th>
-                <th>Nombre</th>
-                <th>Apellido Pat.</th>
-                <th>Apellido Mat.</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Sexo</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Usuario</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($administrativos as $administrativo)
-                <tr>
-                    <td>{{ $administrativo->ci }}</td>
-                    <td>{{ $administrativo->nombre }}</td>
-                    <td>{{ $administrativo->apellido_pat }}</td>
-                    <td>{{ $administrativo->apellido_mat }}</td>
-                    <td>{{ $administrativo->email }}</td>
-                    <td>{{ $administrativo->telefono }}</td>
-                    <td>{{ $administrativo->sexo }}</td>
-                    <td>{{ $administrativo->fecha_nacimiento }}</td>
-                    <td>{{ $administrativo->usuario->name }}</td>
-                    <td>
-                        <a href="{{ route('administrativos.show', $administrativo->ci) }}" class="btn btn-info btn-sm">Ver</a>
-                        <a href="{{ route('administrativos.edit', $administrativo->ci) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('administrativos.destroy', $administrativo->ci) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este administrativo?')">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-</body>
-</html>
+    </div>
+</section>
+@endsection

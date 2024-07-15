@@ -15,11 +15,16 @@ class CreateEstudiantesTable extends Migration
     public function up()
     {
         Schema::create('estudiantes', function (Blueprint $table) {
-            $table->id();
+            $table->string('ci')->primary(); // Clave primaria
             $table->string('nombre');
-            $table->string('apellidos');
-            $table->string('carnet');
-            $table->string('carrera_nivel');
+            $table->string('apellido_pat');
+            $table->string('apellido_mat');
+            $table->string('email')->nullable();
+            $table->string('telefono')->nullable();
+            $table->enum('sexo', ['M', 'F'])->nullable();
+            $table->date('fecha_nacimiento')->nullable();
+            $table->unsignedBigInteger('usuario_id')->nullable(); // Relación con User
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('set null');
             $table->timestamps();
         });
     }

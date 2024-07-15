@@ -14,10 +14,16 @@ class CreateCarrerasTable extends Migration
     public function up()
     {
         Schema::create('carreras', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->integer('duracion');
+            $table->string('sigla')->primary();
+            // Otras columnas
+            $table->string('descripcion');
+            $table->integer('gestion_codigo');
+            // Columnas de timestamps para created_at y updated_at
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('gestion_codigo')->references('codigo')->on('gestiones')->onDelete('cascade');
+        
         });
     }
 
