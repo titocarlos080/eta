@@ -11,10 +11,13 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\GestionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoleMenuController;
 use App\Http\Controllers\UserController;
+use App\Models\Materia;
 
 /*
  |--------------------------------------------------------------------------
@@ -40,15 +43,17 @@ Route::middleware(['auth.eta'])->group(function () {
 
      Route::post('/consumirServicio', [ConsumirServicioController::class, 'RecolectarDatos']);
     Route::post('/consultar', [ConsumirServicioController::class, 'ConsultarEstado']);
-
+ 
 
     Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::resource('niveles', NivelesController::class);
+    Route::resource('materias', MateriaController::class);
     Route::resource('gestiones', GestionController::class);
     Route::resource('carreras', CarreraController::class);
+    Route::resource('permisos', RoleMenuController::class);
 
     Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('usuarios', UserController::class);
     Route::resource('estudiantes', EstudianteController::class);
     Route::resource('administrativos', AdministrativoController::class);
     Route::resource('docentes', DocenteController::class);
@@ -56,8 +61,8 @@ Route::middleware(['auth.eta'])->group(function () {
 
     // Pagos
     Route::get('/search', [PagosController::class, 'search']);
-    Route::get('/pagos/prueba', [PagosController::class, 'prueba'])->name('pagos.prueba');
-    Route::get('/pagos/lista', [PagosController::class, 'lista'])->name('pagos.lista');
+    Route::get('/pagos/qr', [PagosController::class, 'pagarQr']);
+     Route::get('/pagos/lista', [PagosController::class, 'lista'])->name('pagos.lista');
     Route::resource('pagos', PagosController::class);
     Route::get('getEstudianteInfo/{id}', [PagosController::class, 'getEstudianteInfo']);
 });

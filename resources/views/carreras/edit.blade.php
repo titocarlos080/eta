@@ -1,32 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Carrera</title>
- </head>
-<body>
-    <div class="container">
-        <h1>Editar Carrera</h1>
-        <form action="{{ route('carreras.update', $carrera) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="sigla">Sigla</label>
-                <input type="text" name="sigla" id="sigla" class="form-control" value="{{ $carrera->sigla }}" required>
+ <!-- Editar una carrera existente -->
+<div class="modal fade" id="formEditModal" tabindex="-1" aria-labelledby="formEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formEditLabel">Editar Carrera</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <input type="text" name="descripcion" id="descripcion" class="form-control" value="{{ $carrera->descripcion }}" required>
-            </div>
-            <div class="form-group">
-                <label for="gestion_codigo">Gestión</label>
-                <select name="gestion_codigo" id="gestion_codigo" class="form-control" required>
-                    @foreach ($gestiones as $gestion)
-                        <option value="{{ $gestion->codigo }}" {{ $gestion->codigo == $carrera->gestion_codigo ? 'selected' : '' }}>{{ $gestion->descripcion }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-        </form>
+            <form id="editCarreraForm" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="editSigla">SIGLA</label>
+                        <input type="text" id="editSigla" name="sigla" class="form-control" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDescripcion">DESCRIPCIÓN</label>
+                        <input type="text" id="editDescripcion" name="descripcion" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editGestionCodigo">GESTIÓN</label>
+                        <select id="editGestionCodigo" name="gestion_codigo" class="form-control" required>
+                            @foreach($gestiones as $gestion)
+                                <option value="{{ $gestion->codigo }}">{{ $gestion->descripcion }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
     </div>
-</body>
-</html>
+</div>

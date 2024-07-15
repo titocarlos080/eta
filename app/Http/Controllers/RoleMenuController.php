@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\RoleMenu;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class RoleMenuController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        $rol_menus = RoleMenu::all();
+        return view('permisos.index',compact('roles','rol_menus'));
+
     }
 
     /**

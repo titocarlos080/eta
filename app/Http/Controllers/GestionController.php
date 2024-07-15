@@ -15,7 +15,8 @@ class GestionController extends Controller
 
     public function create()
     {
-        return view('gestiones.create');
+        $gestiones = Gestion::all();
+        return view('gestiones.index', compact('gestiones'));
     }
 
     public function store(Request $request)
@@ -34,29 +35,34 @@ class GestionController extends Controller
     public function show(Gestion $gestion)
     {
         return view('gestiones.show', compact('gestion'));
-    }
+    } 
 
-    public function edit(Gestion $gestion)
+    public function edit($codigo)
     {
-        return view('gestiones.edit', compact('gestion'));
+        $gestion = Gestion::find($codigo);
+        return response()->json($gestion);
+
+       
     }
+    
 
-    public function update(Request $request, Gestion $gestion)
+    public function update(Request $request,  $gestion)
     {
-        $request->validate([
-            'descripcion' => 'required|string|max:255',
-            'fecha_inicio' => 'nullable|date',
-            'fecha_fin' => 'nullable|date',
-        ]);
+      
+        $materia = Gestion::find($gestion);
+        $materia->update($request->all());
 
-        $gestion->update($request->all());
+         
 
         return redirect()->route('gestiones.index')->with('success', 'Gestión actualizada exitosamente.');
     }
 
-    public function destroy(Gestion $gestion)
+    public function destroy($codigo)
     {
+        $gestion = Gestion::where('codigo', $codigo)->firstOrFail();
         $gestion->delete();
+    
         return redirect()->route('gestiones.index')->with('success', 'Gestión eliminada exitosamente.');
     }
+    
 }

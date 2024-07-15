@@ -40,9 +40,9 @@ class DatabaseSeeder extends Seeder
         // Submenu items
         $this->createSubMenu($usuarios, 'Crear Usuario', 'usuarios/create', 'fas fa-user-plus');
         $this->createSubMenu($usuarios, 'Listar Usuarios', 'usuarios', 'fas fa-users');
-        $this->createSubMenu($usuarios, 'Estudiantes', 'usuarios/estudiantes', 'fas fa-user-graduate');
-        $this->createSubMenu($usuarios, 'Docentes', 'usuarios/docentes', 'fas fa-chalkboard-teacher');
-        $this->createSubMenu($usuarios, 'Administrativos', 'usuarios/administrativos', 'fas fa-user-tie');
+        $this->createSubMenu($usuarios, 'Estudiantes', 'estudiantes', 'fas fa-user-graduate');
+        $this->createSubMenu($usuarios, 'Docentes', 'docentes', 'fas fa-chalkboard-teacher');
+        $this->createSubMenu($usuarios, 'Administrativos', 'administrativos', 'fas fa-user-tie');
 
         $this->createSubMenu($gestiones, 'Crear Gestión', 'gestiones/create', 'fas fa-calendar-plus');
         $this->createSubMenu($gestiones, 'Listar Gestiones', 'gestiones', 'fas fa-calendar-alt');
@@ -52,24 +52,26 @@ class DatabaseSeeder extends Seeder
 
         $this->createSubMenu($carreras, 'Crear Carrera', 'carreras/create', 'fas fa-graduation-cap');
         $this->createSubMenu($carreras, 'Listar Carreras', 'carreras', 'fas fa-list-alt');
-        $this->createSubMenu($carreras, 'Niveles', 'carreras/niveles', 'fas fa-layer-group');
-        $this->createSubMenu($carreras, 'Grupos', 'carreras/grupos', 'fas fa-users-cog');
-        $this->createSubMenu($carreras, 'Horarios', 'carreras/horarios', 'fas fa-clock');
+        $this->createSubMenu($carreras, 'Niveles', 'niveles', 'fas fa-layer-group');
+        $this->createSubMenu($carreras, 'Grupos', 'grupos', 'fas fa-users-cog');
+        $this->createSubMenu($carreras, 'Horarios', 'horarios', 'fas fa-clock');
 
         $this->createSubMenu($ofertas, 'Crear Oferta', 'ofertas/create', 'fas fa-plus-square');
         $this->createSubMenu($ofertas, 'Listar Ofertas', 'ofertas', 'fas fa-th-list');
 
         $this->createSubMenu($inscripciones, 'Crear Inscripción', 'inscripciones/create', 'fas fa-clipboard-check');
         $this->createSubMenu($inscripciones, 'Listar Inscripciones', 'inscripciones', 'fas fa-clipboard-list');
-
+        
         $this->createSubMenu($pagos, 'Crear Pago', 'pagos/create', 'fas fa-money-check-alt');
         $this->createSubMenu($pagos, 'Listar Pagos', 'pagos', 'fas fa-money-bill-wave');
-
+        $this->createSubMenu($pagos, 'Pagar QR', 'pagos/qr', 'fas fa-qrcode');
+        $this->createSubMenu($pagos, 'Pagos por QR', 'pagos/lista-qr', 'fas fa-file-invoice-dollar');
+        
         $this->createSubMenu($reportes, 'Crear Reporte', 'reportes/create', 'fas fa-file-alt');
         $this->createSubMenu($reportes, 'Listar Reportes', 'reportes', 'fas fa-chart-line');
         $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas', 'fas fa-chart-pie');
 
-        $this->createSubMenu($configuraciones, 'Permisos', 'configuracion/permisos', 'fas fa-user-shield');
+        $this->createSubMenu($configuraciones, 'Permisos', 'permisos', 'fas fa-user-shield');
         $this->createSubMenu($configuraciones, 'Roles', 'roles', 'fas fa-user-tag');
 
 
@@ -79,9 +81,9 @@ class DatabaseSeeder extends Seeder
 
 
         // 1. Create the admin role if it doesn't exist
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $adminRole2 = Role::firstOrCreate(['name' => 'docente']);
-        $adminRole3 = Role::firstOrCreate(['name' => 'estudiante']);
+        $adminRole = Role::firstOrCreate(['nombre' => 'admin']);
+        $adminRole2 = Role::firstOrCreate(['nombre' => 'docente']);
+        $adminRole3 = Role::firstOrCreate(['nombre' => 'estudiante']);
 
         // 2. Get all menu IDs
         $menuIds = Menu::pluck('id')->toArray();

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Roles')
+@section('title', 'materias')
 
 @section('content')
 <section class="content">
@@ -10,8 +10,8 @@
                 <div class="row justify-content-between">
                     <div class="col-xs-4 my-auto">
                         <h3 class="card-title my-auto">
-                            <strong>LISTA DE ROLES</strong>
-                            <a class="btn" href="{{ route('roles.index') }}">
+                            <strong>LISTA DE MATERIAS</strong>
+                            <a class="btn" href="{{ route('materias.index') }}">
                                 <i class="fas fa-sync fa-md fa-fw"></i>
                             </a>
                         </h3>
@@ -24,40 +24,51 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="formCreateLabel">Registrar nuevo rol</h5>
+                                    <h5 class="modal-title" id="fomrCreateLabel">Registrar nuevo </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @include('roles.create')
+                                    @include('materias.create')
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <div class="card-body p-0">
+
                 <table class="table table-hover table-head-fixed">
-                    <thead class="table-light">
+                    <thead class="table-light ">
                         <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>ACCIONES</th>
+                            <th>SIGLA</th>
+                            <th>DESCRIPCION</th>
+                            <th>OBSERVACION</th>
+                            <th>CREDITOS</th>
+                            <th>ESTADO</th>
+
                         </tr>
                     </thead>
+
+
                     <tbody>
-                        @foreach($roles as $role)
+                        @foreach($materias as $materia)
                         <tr>
-                            <td>{{ $role->id }}</td>
-                            <td>{{ $role->nombre }}</td>
+                            <td>{{ $materia->sigla }}</td>
+                            <td>{{ $materia->descripcion }}</td>
+                            <td>{{ $materia->observacion }}</td>
+                            <td>{{ $materia->creditos }}</td>
+                            <td>{{ $materia->estado ? 'Activo' : 'Inactivo' }}</td>
                             <td>
-                                <button type="button" class="btn btn-warning btn-sm" onclick="editRole('{{ $role->id }}')">Editar</button>
-                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline">
+                                <!-- Formulario de eliminación directamente en la tabla -->
+                                <button type="button" class="btn btn-warning btn-sm" onclick="editMateria('{{ $materia->sigla }}')">Editar</button>
+                                <form action="{{ route('materias.destroy', $materia->sigla) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este rol?')">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este Materia?')">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
@@ -65,42 +76,47 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
+
 </section>
-
 <!-- Incluir el formulario de edición -->
-@include('roles.edit')
+@include('materias.edit')
 @stop
-
 <script>
-    function editRole(id) {
-        fetch(`/roles/${id}/edit`)
+
+  
+    function editMateria(sigla) {
+        fetch(`/materias/${sigla}/edit`)
             .then(response => response.json())
-            .then(role => {
-                document.getElementById('editId').value = role.id;
-                document.getElementById('editNombre').value = role.nombre;
+            .then(materia => {
+                  
+                document.getElementById('editSigla').value = materia.sigla;
+                document.getElementById('editDescripcion').value = materia.descripcion;
+                document.getElementById('editObservacion').value = materia.observacion;
+                document.getElementById('editCreditos').value = materia.creditos;
+                document.getElementById('editEstadoActivo').checked = materia.estado;
+                document.getElementById('editEstadoInactivo').checked = !materia.estado;
 
                 // Correct the form action
-                document.getElementById('editRoleForm').action = `/roles/${id}`;
+                document.getElementById('editMateriaForm').action = `/materias/${sigla}`;
 
                 $('#formEditModal').modal('show');
             })
             .catch(error => console.error('Error:', error));
     }
 </script>
-
 @section('js')
 <script>
-    function confirmarEliminacion(roleId) {
-        if (confirm('¿Estás seguro de que deseas eliminar este rol?')) {
-            // Si el usuario hace clic en "Aceptar", redirige al controlador para eliminar el rol
-            window.location.href = '{{ url("roles") }}/' + roleId;
+    function confirmarEliminacion(materiaSigla) {
+        if (confirm('¿Estás seguro de que deseas eliminar este materia?')) {
+            // Si el usuario hace clic en "Aceptar", redirige al controlador para eliminar el nivel
+            window.location.href = '{{ url("materias") }}/' + materiaSigla;
         }
     }
 </script>
 @stop
-
 @push('scripts')
 <script src="{{ asset('js/theme.js') }}"></script>
 @endpush

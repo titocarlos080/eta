@@ -16,7 +16,7 @@ class NivelesController extends Controller
      */
     public function index()
     {
-        dd("Hols");
+        
         $niveles= Niveles::orderby('id', 'asc')->paginate(9);
         return view('niveles.index',compact('niveles'));
     }
@@ -78,13 +78,13 @@ class NivelesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+       $request->validate([
             'nombre' => 'required',
         ]);
     
         $nivel = Niveles::find($id);
         $nivel->update($request->all());
-    
+     
         return redirect()->route('niveles.index')->with('success', 'Nivel actualizado exitosamente.');
     }
 

@@ -20,14 +20,14 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
             $user = Auth::user();
             // Fetch the user's role efficiently
-            $roleName = $user->rol->name; // Assuming you have a 'role' relationship on your User model
+            $roleName = $user->rol->nombre; // Assuming you have a 'role' relationship on your User model
             // Get menu items associated with the user's role
             $menuItems = DB::select('
                 SELECT menus.*
                 FROM roles
                 JOIN role_menus ON roles.id = role_menus.role_id
                 JOIN menus ON menus.id = role_menus.menu_id
-                WHERE roles.name = ?
+                WHERE roles.nombre = ?
             ', [$roleName]);
 
             $menuHeaders = DB::select('SELECT * FROM menus WHERE parent_id = 0');

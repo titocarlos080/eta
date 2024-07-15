@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Roles')
+@section('title', 'Permisos')
 
 @section('content')
 <section class="content">
@@ -10,7 +10,7 @@
                 <div class="row justify-content-between">
                     <div class="col-xs-4 my-auto">
                         <h3 class="card-title my-auto">
-                            <strong>LISTA DE ROLES</strong>
+                            <strong>LISTA DE PERMISOS</strong>
                             <a class="btn" href="{{ route('roles.index') }}">
                                 <i class="fas fa-sync fa-md fa-fw"></i>
                             </a>
@@ -30,7 +30,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @include('roles.create')
+                                    @include('permisos.create')
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
 </section>
 
 <!-- Incluir el formulario de edición -->
-@include('roles.edit')
+@include('permisos.edit')
 @stop
 
 <script>
@@ -95,7 +95,7 @@
     function confirmarEliminacion(roleId) {
         if (confirm('¿Estás seguro de que deseas eliminar este rol?')) {
             // Si el usuario hace clic en "Aceptar", redirige al controlador para eliminar el rol
-            window.location.href = '{{ url("roles") }}/' + roleId;
+            window.location.href = '{{ url("permisos") }}/' + roleId;
         }
     }
 </script>

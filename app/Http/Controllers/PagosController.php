@@ -188,10 +188,10 @@ class PagosController extends Controller
         //
     }
 
-    public function prueba()
+    public function pagarQr()
     {
         return view("pagos.prueba");
-        //
+        // 
     }
 
 
