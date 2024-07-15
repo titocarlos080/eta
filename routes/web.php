@@ -11,6 +11,7 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\GestionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PagosController;
@@ -51,6 +52,7 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('gestiones', GestionController::class);
     Route::resource('carreras', CarreraController::class);
     Route::resource('permisos', RoleMenuController::class);
+    Route::resource('horarios', HorarioController::class);
 
     Route::resource('roles', RoleController::class);
     Route::resource('usuarios', UserController::class);

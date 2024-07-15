@@ -295,6 +295,7 @@ CREATE TABLE pagos (
      FOREIGN KEY(estudiante_materia_id) REFERENCES estudiante_materia(id)
  
  );
+ 
  CREATE TABLE egresos (
     id SERIAL PRIMARY KEY,
     monto DECIMAL(10,2) NOT NULL,
