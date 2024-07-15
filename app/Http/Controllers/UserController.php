@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pagina;
 use App\Models\User;
 use App\Models\Rol;
 use App\Models\Role;
@@ -16,15 +17,21 @@ class UserController extends Controller
     {
         $usuarios = User::all();
         $roles = Role::all();
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
 
-        return view('users.index', compact('roles', 'usuarios'));
+        return view('users.index', compact('roles', 'usuarios','visitas'));
     }
 
     public function create()
-    {    $usuarios = User::all();
+    {      $usuarios = User::all();
         $roles = Role::all();
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
 
-        return view('users.index', compact('roles', 'usuarios'));
+        return view('users.index', compact('roles', 'usuarios','visitas'));
     }
     public function store(Request $request)
     {

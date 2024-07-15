@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Gestion;
 use App\Models\Horario;
+use App\Models\Pagina;
 use Illuminate\Http\Request;
 
 class HorarioController extends Controller
 {
     public function index()
-    {
+    {      Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $horarios = Horario::all();
-        return view('horarios.index', compact('horarios'));
+        return view('horarios.index', compact('horarios','visitas'));
     }
 
     public function store(Request $request)

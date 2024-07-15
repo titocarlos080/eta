@@ -74,3 +74,10 @@
     </div>
 </section>
 @endsection
+@section('footer')
+    <div class="container">
+        <footer class="footer">
+            <p class="text-center">Número de visitas: {{ $visitas }}</p>
+        </footer>
+    </div>
+@stop

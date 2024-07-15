@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pagina;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
     public function index()
-    {
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $roles = Role::all();
-        return view('roles.index', compact('roles'));
+        return view('roles.index', compact('roles','visitas'));
     }
 
     public function create()

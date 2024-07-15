@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Pagina;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     public function index()
-    {
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $menus = Menu::all();
-        return view('menus.index', compact('menus'));
+        return view('menus.index', compact('menus','visitas'));
     }
 
     public function create()

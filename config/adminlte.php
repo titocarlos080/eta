@@ -291,10 +291,10 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-     
-    'menu' => 
+
+    'menu' =>
     [
-         // Navbar items:
+        // Navbar items:
         [
             'type'         => 'navbar-search',
             'text'         => 'buscar',
@@ -307,12 +307,12 @@ return [
         ],
         [
             'type' => 'darkmode-widget',
-             'icon-enabled' => 'fas fa-moon',
-             'icon-disabled' => 'fas fa-sun',
-             'color-enabled' => 'white',
-             'color-disabled' => 'yellow',
+            'icon-enabled' => 'fas fa-moon',
+            'icon-disabled' => 'fas fa-sun',
+            'color-enabled' => 'white',
+            'color-disabled' => 'yellow',
             'topnav_right' => true,
-        ], 
+        ],
         [
             'type' => 'link',
             'text' => '',
@@ -329,11 +329,11 @@ return [
             'id' => 'theme-toggle-kids',
             'topnav_right' => true,
         ],
- 
-         
-       
-         
-       
+
+
+
+
+
     ],
 
     /*
@@ -356,7 +356,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
-        App\Http\Filters\MenuFilter::class        
+        App\Http\Filters\MenuFilter::class
     ],
 
     /*
@@ -370,6 +370,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Plugins-Configuration
     |
     */
+    
 
     'plugins' => [
         'Datatables' => [
@@ -452,8 +453,8 @@ return [
                     'location' => 'js/theme.js',
                 ],
             ],
+        ],
     ],
-],
 
     /*
     |--------------------------------------------------------------------------

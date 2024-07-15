@@ -83,7 +83,13 @@
 <!-- Incluir el formulario de edición -->
 @include('horarios.edit')
 @stop
-
+@section('footer')
+    <div class="container">
+        <footer class="footer">
+            <p class="text-center">Número de visitas: {{ $visitas }}</p>
+        </footer>
+    </div>
+@stop
 @section('js')
 <script>
     function editHorario(id) {

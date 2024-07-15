@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pagina extends Model
 {
     use HasFactory;
-    protected $table = 'pagina';
+    protected $table = 'paginas';
 
     protected $fillable = ['path', 'visitas'];
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\Pagina;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,11 +11,13 @@ use Illuminate\Support\Facades\Hash;
 class EstudianteController extends Controller
 {
     public function index()
-    {
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         
 
         $estudiantes = Estudiante::all();
-        return view('estudiantes.index', compact('estudiantes') );
+        return view('estudiantes.index', compact('estudiantes','visitas') );
     }
 
     public function create()

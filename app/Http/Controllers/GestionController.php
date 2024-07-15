@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gestion;
+use App\Models\Pagina;
 use Illuminate\Http\Request;
 
 class GestionController extends Controller
 {
     public function index()
-    {
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $gestiones = Gestion::all();
-        return view('gestiones.index', compact('gestiones'));
+        return view('gestiones.index', compact('gestiones','visitas'));
     }
 
     public function create()

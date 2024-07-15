@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Docente;
+use App\Models\Pagina;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,9 +12,11 @@ class DocenteController extends Controller
 {
     // Muestra la lista de docentes
     public function index()
-    {
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $docentes = Docente::all(); // Obtiene todos los docentes
-        return view('docentes.index', compact('docentes'));
+        return view('docentes.index', compact('docentes','visitas'));
     }
 
     // Muestra el formulario para crear un nuevo docente

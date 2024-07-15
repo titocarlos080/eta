@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrera;
 use App\Models\carreras;
 use App\Models\Estudiante;
 use App\Models\Estudiantes;
 use App\Models\niveles;
+use App\Models\Pagina;
 use App\Models\pagos;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -19,10 +21,12 @@ class PagosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {       Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $pago=pagos::all();
         //$pagos = Pagos::with(['estudiante.carreras'])->get();
-        return view('pagos.index',compact('pago'));
+        return view('pagos.index',compact('pago','visitas'));
     }
     public function pdf(){
        $pagos=Pagos::all();
@@ -33,8 +37,8 @@ class PagosController extends Controller
     {
         $pagos=pagos::all();
         $estudiantes = Estudiante::with ('carreras')->orderBy('id', 'asc')->paginate(9);
-        $carreras=Carreras::all();
-        $carreras = Carreras::with('niveles')->get();
+        $carreras=Carrera::all();
+        $carreras = Carrera::with('niveles')->get();
         return view('pagos.lista',compact('pagos','estudiantes','carreras'));
     }
    
@@ -67,7 +71,7 @@ class PagosController extends Controller
         $nivelId = $carreraNivelIds[1];
         
         // Buscar el nombre de la carrera y el nivel
-        $carrera = Carreras::find($carreraId);
+        $carrera = Carrera::find($carreraId);
         $nivel = niveles::find($nivelId);
     
         if (!$carrera || !$nivel) {
@@ -148,7 +152,7 @@ class PagosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show( $id)
-    {
+    {  
         $pago = Pagos::findOrFail($id);
         return view('pagos.show', compact('pago'));
     }
@@ -189,9 +193,14 @@ class PagosController extends Controller
     }
 
     public function pagarQr()
-    {
-        return view("pagos.prueba");
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+
+        return view("pagos.prueba",compact('visitas'));
         // 
+
+    
     }
 
 

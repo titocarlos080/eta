@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrativo;
+use App\Models\Pagina;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,15 +12,19 @@ class AdministrativoController extends Controller
 {
     // Muestra la lista de administrativos
     public function index()
-    {
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $administrativos = Administrativo::all(); // Obtiene todos los administrativos
-        return view('administrativos.index', compact('administrativos'));
+        return view('administrativos.index', compact('administrativos','visitas'));
     }
 
     // Muestra el formulario para crear un nuevo administrativo
     public function create()
-    {
-        return view('administrativos.create');
+    {     Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+        return view('administrativos.create','visitas');
     }
 
     // Almacena un nuevo administrativo en la base de datos
@@ -99,9 +104,11 @@ class AdministrativoController extends Controller
 
     // Muestra el formulario para editar un administrativo
     public function edit($ci)
-    {
+    {      Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $administrativo = Administrativo::findOrFail($ci);
-        return view('administrativos.edit', compact('administrativo'));
+        return view('administrativos.edit', compact('administrativo','visitas'));
     }
 
     // Actualiza un administrativo en la base de datos

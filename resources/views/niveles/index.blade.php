@@ -82,6 +82,13 @@
     <!-- Incluir el formulario de edición -->
 @include('partials.niveles.form_edit')
 @stop
+@section('footer')
+    <div class="container">
+        <footer class="footer">
+            <p class="text-center">Número de visitas: {{ $visitas }}</p>
+        </footer>
+    </div>
+@stop
 <script>
     function editNivel(id) {
         fetch(`/niveles/${id}/edit`)
