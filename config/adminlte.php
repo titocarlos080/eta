@@ -404,6 +404,17 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'ESTADISTICAS',
+            'icon'    => 'fas fa-fw far fa-newspaper',
+            'submenu' => [
+                [
+                    'text' => 'LISTA',
+                    'url'  => 'carreras/',
+                    'icon' => 'fas fa-fw fas fa-align-justify',
+                ],
+            ],
+        ],
        
     ],
 
