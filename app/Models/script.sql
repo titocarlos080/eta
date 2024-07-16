@@ -235,7 +235,7 @@ CREATE TABLE estudiantes_carrera (
 
 
 -- ////////////////////////////////////////////////////////////////////////////
-CREATE TABLE grupos_materias (
+CREATE TABLE grupo_materias (
     sigla VARCHAR(10) NOT NULL PRIMARY KEY,
     descripcion VARCHAR(255) NOT NULL,
     materia_sigla VARCHAR(255)  NOT NULL,
@@ -246,6 +246,7 @@ CREATE TABLE grupos_materias (
     FOREIGN KEY(carrera_sigla) REFERENCES carreras(sigla)
  
  );
+
 CREATE TABLE horarios (
     id SERIAL PRIMARY KEY,
     hora_inicio TIME NOT NULL,

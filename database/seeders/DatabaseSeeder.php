@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         $this->createSubMenu($carreras, 'Crear Carrera', 'carreras/create', 'fas fa-graduation-cap');
         $this->createSubMenu($carreras, 'Listar Carreras', 'carreras', 'fas fa-list-alt');
         $this->createSubMenu($carreras, 'Niveles', 'niveles', 'fas fa-layer-group');
-        $this->createSubMenu($carreras, 'Grupos', 'grupos', 'fas fa-users-cog');
+        $this->createSubMenu($carreras, 'Grupos', 'grupo_materias', 'fas fa-users-cog');
         $this->createSubMenu($carreras, 'Horarios', 'horarios', 'fas fa-clock');
 
         $this->createSubMenu($ofertas, 'Crear Oferta', 'ofertas/create', 'fas fa-plus-square');

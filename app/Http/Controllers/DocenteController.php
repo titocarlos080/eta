@@ -37,8 +37,7 @@ class DocenteController extends Controller
             'email' => 'required|email|unique:docentes,email',
             'kardex' => 'nullable|string|max:255',
             'curriculum' => 'nullable|string|max:255',
-            'password' => 'required|string|min:8|confirmed', // Añadido para validar la contraseña
-        ]);
+         ]);
 
         try {
             // Crea el usuario asociado

@@ -25,4 +25,8 @@ class Carrera extends Model
     {
         return $this->belongsTo(Gestion::class, 'gestion_codigo', 'codigo');
     }
+    public function carrera_materias()
+    {
+        return $this->hasMany(CarreraMateria::class,'carrera_sigla','sigla');
+    }
 }

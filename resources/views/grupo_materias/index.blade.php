@@ -1,8 +1,8 @@
 @extends('adminlte::page')
 
-@section('title', 'materias')
+@section('title', 'Grupo-Materia')
 
-@section('content')
+@section('content')  
 <section class="content">
     <div class="container-fluid p-4">
         <div class="card">
@@ -10,8 +10,8 @@
                 <div class="row justify-content-between">
                     <div class="col-xs-4 my-auto">
                         <h3 class="card-title my-auto">
-                            <strong>LISTA DE MATERIAS</strong>
-                            <a class="btn" href="{{ route('materias.index') }}">
+                            <strong>LISTA DE GRUPOS</strong>
+                            <a class="btn" href="{{ route('grupo_materias.index') }}">
                                 <i class="fas fa-sync fa-md fa-fw"></i>
                             </a>
                         </h3>
@@ -24,114 +24,110 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="fomrCreateLabel">Registrar nuevo </h5>
+                                    <h5 class="modal-title" id="fomrCreateLabel">Registrar nuevo grupo</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @include('materias.create')
+                                    @include('grupo_materias.create')
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="card-body p-0">
-
                 <table class="table table-hover table-head-fixed">
                     <thead class="table-light ">
                         <tr>
                             <th>SIGLA</th>
-                            <th>DESCRIPCION</th>
-                            <th>OBSERVACION</th>
-                            <th>CREDITOS</th>
-                            <th>ESTADO</th>
-
+                            <th>DESCRIPCIÓN</th>
+                            <th>MATERIA</th>
+                            <th>CARRERA</th>
+                            <th>DOCENTE</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
-
-
                     <tbody>
-                        @foreach($materias as $materia)
+                        @foreach($grupoMaterias as $gm)
                         <tr>
-                            <td>{{ $materia->sigla }}</td>
-                            <td>{{ $materia->descripcion }}</td>
-                            <td>{{ $materia->observacion }}</td>
-                            <td>{{ $materia->creditos }}</td>
-                            <td>{{ $materia->estado ? 'Activo' : 'Inactivo' }}</td>
+                            <td>{{ $gm->sigla }}</td>
+                            <td>{{ $gm->descripcion }}</td>
+                            <td>{{ $gm->materia_sigla }}</td>
+                            <td>{{ $gm->carrera_sigla }}</td>
+                            <td>{{ $gm->docente->nombre }}</td>
                             <td>
-                                <a href="{{ route('materias.show', $materia->sigla) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
+                                <a href="{{ route('grupo_materias.show', $gm->sigla) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                <button type="button" class="btn btn-warning btn-sm" onclick="editMateria('{{ $materia->sigla }}')" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <button type="button" class="btn btn-warning btn-sm" onclick="editGrupoMateria('{{ $gm->sigla }}')" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </button>
 
-                                <form action="{{ route('materias.destroy', $materia->sigla) }}" method="POST" class="d-inline">
+                                <form action="{{ route('grupo_materias.destroy', $gm->sigla) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta Materia?')" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este grupo?')" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
                             </td>
-
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
-
 </section>
-<!-- Incluir el formulario de edición -->
-@include('materias.edit')
-@stop
 
+<!-- Incluir el formulario de edición -->
+@include('grupo_materias.edit')
+@stop
 @section('footer')
-<div class="container">
-    <footer class="footer">
-        <p class="text-center">Número de visitas: {{ $visitas }}</p>
-    </footer>
-</div>
+    <div class="container">
+        <footer class="footer">
+            <p class="text-center">Número de visitas: {{ $visitas }}</p>
+        </footer>
+    </div>
 @stop
 <script>
-    function editMateria(sigla) {
-        fetch(`/materias/${sigla}/edit`)
-            .then(response => response.json())
-            .then(materia => {
+    function editGrupoMateria(sigla) {
 
-                document.getElementById('editSigla').value = materia.sigla;
-                document.getElementById('editDescripcion').value = materia.descripcion;
-                document.getElementById('editObservacion').value = materia.observacion;
-                document.getElementById('editCreditos').value = materia.creditos;
-                document.getElementById('editEstadoActivo').checked = materia.estado;
-                document.getElementById('editEstadoInactivo').checked = !materia.estado;
+        fetch(`/grupo_materias/${sigla}/edit`)
+            .then(response => response.json())
+            .then(grupoMateria => {
+                document.getElementById('editSigla').value = grupoMateria.sigla;
+                document.getElementById('editDescripcion').value = grupoMateria.descripcion;
+                document.getElementById('editMateriaSigla').value = grupoMateria.materia_sigla;
+                document.getElementById('editCarreraSigla').value = grupoMateria.carrera_sigla;
+                document.getElementById('editDocenteCi').value = grupoMateria.docente_ci;
 
                 // Correct the form action
-                document.getElementById('editMateriaForm').action = `/materias/${sigla}`;
+                document.getElementById('editGrupoMateriaForm').action = `/grupo_materias/${sigla}`;
 
                 $('#formEditModal').modal('show');
-            })
-            .catch(error => console.error('Error:', error));
+            }).catch(error => console.error('Error:', error));
+
     }
 </script>
+
+
+
+
 @section('js')
 <script>
-    function confirmarEliminacion(materiaSigla) {
-        if (confirm('¿Estás seguro de que deseas eliminar este materia?')) {
-            // Si el usuario hace clic en "Aceptar", redirige al controlador para eliminar el nivel
-            window.location.href = '{{ url("materias") }}/' + materiaSigla;
+    function confirmarEliminacion(sigla) {
+        if (confirm('¿Estás seguro de que deseas eliminar esta grupo?')) {
+            window.location.href = '{{ url("grupo_materias") }}/' + sigla;
         }
     }
 </script>
 @stop
+
 @push('scripts')
 <script src="{{ asset('js/theme.js') }}"></script>
 @endpush

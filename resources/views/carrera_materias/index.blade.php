@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'materias')
+@section('title', 'Carrera Materias')
 
 @section('content')
 <section class="content">
@@ -10,8 +10,8 @@
                 <div class="row justify-content-between">
                     <div class="col-xs-4 my-auto">
                         <h3 class="card-title my-auto">
-                            <strong>LISTA DE MATERIAS</strong>
-                            <a class="btn" href="{{ route('materias.index') }}">
+                            <strong>LISTA DE CARRERA MATERIAS</strong>
+                            <a class="btn" href="{{ route('carrera_materias.index') }}">
                                 <i class="fas fa-sync fa-md fa-fw"></i>
                             </a>
                         </h3>
@@ -24,57 +24,49 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="fomrCreateLabel">Registrar nuevo </h5>
+                                    <h5 class="modal-title" id="formCreateLabel">Registrar nueva carrera materia</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @include('materias.create')
+                                    @include('carrera_materias.create')
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="card-body p-0">
-
                 <table class="table table-hover table-head-fixed">
-                    <thead class="table-light ">
+                    <thead class="table-light">
                         <tr>
-                            <th>SIGLA</th>
-                            <th>DESCRIPCION</th>
-                            <th>OBSERVACION</th>
-                            <th>CREDITOS</th>
-                            <th>ESTADO</th>
-
+                            <th>NIVEL</th>
+                            <th>MATERIA</th>
+                            <th>CARRERA</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
-
-
                     <tbody>
-                        @foreach($materias as $materia)
+                        @foreach($carreraMaterias as $carreraMateria)
                         <tr>
-                            <td>{{ $materia->sigla }}</td>
-                            <td>{{ $materia->descripcion }}</td>
-                            <td>{{ $materia->observacion }}</td>
-                            <td>{{ $materia->creditos }}</td>
-                            <td>{{ $materia->estado ? 'Activo' : 'Inactivo' }}</td>
+                            <td>{{ $carreraMateria->nivel->nombre }}</td>
+                            <td>{{ $carreraMateria->materia->descripcion }}</td>
+                            <td>{{ $carreraMateria->carrera->sigla }}</td>
                             <td>
-                                <a href="{{ route('materias.show', $materia->sigla) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
+                                <a href="{{ route('carrera_materias.show', $carreraMateria->id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                <button type="button" class="btn btn-warning btn-sm" onclick="editMateria('{{ $materia->sigla }}')" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <button type="button" class="btn btn-warning btn-sm" onclick="editCarreraMateria('{{ $carreraMateria->id }}')" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </button>
 
-                                <form action="{{ route('materias.destroy', $materia->sigla) }}" method="POST" class="d-inline">
+                                <form action="{{ route('carrera_materias.destroy', $carreraMateria->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta Materia?')" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta carrera materia?')" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -85,13 +77,12 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
-
 </section>
+
 <!-- Incluir el formulario de edición -->
-@include('materias.edit')
+@include('carrera_materias.edit')
 @stop
 
 @section('footer')
@@ -101,37 +92,35 @@
     </footer>
 </div>
 @stop
+
+@section('js')
 <script>
-    function editMateria(sigla) {
-        fetch(`/materias/${sigla}/edit`)
+    function editCarreraMateria(id) {
+        fetch(`/carrera_materias/${id}/edit`)
             .then(response => response.json())
-            .then(materia => {
-
-                document.getElementById('editSigla').value = materia.sigla;
-                document.getElementById('editDescripcion').value = materia.descripcion;
-                document.getElementById('editObservacion').value = materia.observacion;
-                document.getElementById('editCreditos').value = materia.creditos;
-                document.getElementById('editEstadoActivo').checked = materia.estado;
-                document.getElementById('editEstadoInactivo').checked = !materia.estado;
-
+            .then(carreraMateria => {
+                console.log(carreraMateria);
+                document.getElementById('editNivelId').value = carreraMateria.nivel_id;
+                document.getElementById('editMateriaSigla').value = carreraMateria.materia_sigla;
+                document.getElementById('editCarreraSigla').value = carreraMateria.carrera_sigla;
                 // Correct the form action
-                document.getElementById('editMateriaForm').action = `/materias/${sigla}`;
+                document.getElementById('editCarreraMateriaForm').action = `/carrera_materias/${id}`;
 
                 $('#formEditModal').modal('show');
             })
             .catch(error => console.error('Error:', error));
     }
 </script>
-@section('js')
+
 <script>
-    function confirmarEliminacion(materiaSigla) {
-        if (confirm('¿Estás seguro de que deseas eliminar este materia?')) {
-            // Si el usuario hace clic en "Aceptar", redirige al controlador para eliminar el nivel
-            window.location.href = '{{ url("materias") }}/' + materiaSigla;
+    function confirmarEliminacion(carreraMateriaId) {
+        if (confirm('¿Estás seguro de que deseas eliminar esta carrera materia?')) {
+            window.location.href = '{{ url("carrera_materias") }}/' + carreraMateriaId;
         }
     }
 </script>
 @stop
+
 @push('scripts')
 <script src="{{ asset('js/theme.js') }}"></script>
 @endpush

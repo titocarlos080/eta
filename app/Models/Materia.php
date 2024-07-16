@@ -10,13 +10,19 @@ class Materia extends Model
     use HasFactory;
     protected $table = 'materias';
     protected $primaryKey = 'sigla';
-    protected $keyType = 'string'; 
-    protected $fillable = ['sigla', 'descripcion', 'observacion', 'creditos' ,'estado' ]; 
- 
-// In your Materia model
-protected $casts = [
-    // Remove 'sigla' => 'integer' if it exists
-];
+    protected $keyType = 'string';
+    protected $fillable = ['sigla', 'descripcion', 'observacion', 'creditos', 'estado'];
+
+    // In your Materia model
+    protected $casts = [
+        // Remove 'sigla' => 'integer' if it exists
+    ];
+
+
+    public function carrera_materias()
+    {
+        return $this->hasMany(CarreraMateria::class,'materia_sigla','sigla');
+    }
 }
 
 /*CREATE TABLE materias (

@@ -9,16 +9,18 @@ class niveles extends Model
 {
     use HasFactory;
     public $timestamps = false;
-        protected $fillable = [
+    protected $fillable = [
         'nombre',
     ];
     public function niveles()
-        {
-            return $this->hasMany(Niveles::class);
-        }
-public function carreras()
-{
-    return $this->belongsToMany(Carreras::class, 'carrera_niveles', 'nivel_id', 'carrera_id');
-}
+    {
+        return $this->hasMany(Niveles::class);
+    } 
+    public function carrera_materias()
+    {
+        return $this->hasMany(CarreraMateria::class,'nivel_id','id');
+    }
+
+
 
 }

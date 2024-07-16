@@ -55,6 +55,9 @@
                             <td>{{ $carrera->descripcion }}</td>
                             <td>{{ $carrera->gestion->descripcion }}</td>
                             <td>
+                                <a href="{{ route('carrera_materias.index') }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Agregar materias">
+                                    <i class="fas fa-plus"></i>
+                                </a>
                                 <a href="{{ route('carreras.show', $carrera->sigla) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
                                     <i class="fas fa-eye"></i>
                                 </a>
@@ -79,18 +82,18 @@
             </div>
         </div>
     </div>
-    
+
 </section>
 
 <!-- Incluir el formulario de edición -->
-@include('carreras.edit') 
+@include('carreras.edit')
 @stop
 @section('footer')
-    <div class="container">
-        <footer class="footer">
-            <p class="text-center">Número de visitas: {{ $visitas }}</p>
-        </footer>
-    </div>
+<div class="container">
+    <footer class="footer">
+        <p class="text-center">Número de visitas: {{ $visitas }}</p>
+    </footer>
+</div>
 @stop
 <script>
     function editCarrera(sigla) {
@@ -101,7 +104,7 @@
                 document.getElementById('editDescripcion').value = carrera.descripcion;
                 const selectGestion = document.getElementById('editGestionCodigo');
                 selectGestion.value = carrera.gestion_codigo;
-                 // Correct the form action
+                // Correct the form action
                 document.getElementById('editCarreraForm').action = `/carreras/${sigla}`;
 
                 $('#formEditModal').modal('show');

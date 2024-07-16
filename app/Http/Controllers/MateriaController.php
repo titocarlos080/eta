@@ -31,7 +31,14 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        //
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+
+        $materias = Materia::all();
+ 
+
+         return view('materias.index',compact('materias','visitas'));
     }
 
     /**

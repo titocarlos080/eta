@@ -24,7 +24,7 @@ class AdministrativoController extends Controller
     {     Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-        return view('administrativos.create','visitas');
+        return view('administrativos.create', compact('visitas'));
     }
 
     // Almacena un nuevo administrativo en la base de datos

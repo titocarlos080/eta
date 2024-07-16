@@ -18,8 +18,11 @@ class GestionController extends Controller
 
     public function create()
     {
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $gestiones = Gestion::all();
-        return view('gestiones.index', compact('gestiones'));
+        return view('gestiones.index', compact('gestiones','visitas'));
     }
 
     public function store(Request $request)

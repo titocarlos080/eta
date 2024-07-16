@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\niveles;
+use App\Models\Pagina;
 use Illuminate\Http\Request;
 
  
@@ -15,10 +16,13 @@ class NivelesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {  Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         
         $niveles= Niveles::orderby('id', 'asc')->paginate(9);
-        return view('niveles.index',compact('niveles'));
+
+        return view('niveles.index',compact('niveles','visitas'));
     }
 
     /**

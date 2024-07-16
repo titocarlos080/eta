@@ -14,12 +14,12 @@ class CreateMateriasTable extends Migration
     public function up()
     {
         Schema::create('materias', function (Blueprint $table) {
-            $table->string('sigla'); 
+            $table->string('sigla')->unique();
             $table->string('descripcion');
             $table->string('observacion');
             $table->integer('creditos');
-            $table->boolean('estado')->default(true); 
-            $table->timestamps(); 
+            $table->boolean('estado')->default(true);
+            $table->timestamps();
         });
     }
 
