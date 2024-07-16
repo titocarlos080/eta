@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
         
         $this->createSubMenu($reportes, 'Crear Reporte', 'reportes/create', 'fas fa-file-alt');
         $this->createSubMenu($reportes, 'Listar Reportes', 'reportes', 'fas fa-chart-line');
-        $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas', 'fas fa-chart-pie');
+        $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas/estudiantes', 'fas fa-chart-pie');
 
         $this->createSubMenu($configuraciones, 'Permisos', 'permisos', 'fas fa-user-shield');
         $this->createSubMenu($configuraciones, 'Roles', 'roles', 'fas fa-user-tag');
