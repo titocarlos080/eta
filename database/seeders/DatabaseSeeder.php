@@ -59,14 +59,17 @@ class DatabaseSeeder extends Seeder
         $this->createSubMenu($ofertas, 'Crear Oferta', 'ofertas/create', 'fas fa-plus-square');
         $this->createSubMenu($ofertas, 'Listar Ofertas', 'ofertas', 'fas fa-th-list');
 
-        $this->createSubMenu($inscripciones, 'Crear Inscripción', 'inscripciones/create', 'fas fa-clipboard-check');
-        $this->createSubMenu($inscripciones, 'Listar Inscripciones', 'inscripciones', 'fas fa-clipboard-list');
-        
+        $this->createSubMenu($inscripciones, 'Crear Inscripción', 'inscripciones/create', 'fas fa-plus-square');
+        $this->createSubMenu($inscripciones, 'Listar Inscripciones', 'inscripciones', 'fas fa-list');
+        $this->createSubMenu($inscripciones, 'Inscribir Carrera', 'carrera_estudiantes', 'fas fa-graduation-cap');
+        $this->createSubMenu($inscripciones, 'Inscribir Materia', 'materia_estudiantes', 'fas fa-book');
+
         $this->createSubMenu($pagos, 'Crear Pago', 'pagos/create', 'fas fa-money-check-alt');
         $this->createSubMenu($pagos, 'Listar Pagos', 'pagos', 'fas fa-money-bill-wave');
         $this->createSubMenu($pagos, 'Pagar QR', 'pagos/qr', 'fas fa-qrcode');
-        $this->createSubMenu($pagos, 'Pagos por QR', 'pagos/lista-qr', 'fas fa-file-invoice-dollar');
-        
+        $this->createSubMenu($pagos, 'Pagos por QR', 'pagos/lista-qr', 'fas fa-receipt');
+        $this->createSubMenu($pagos, 'Egresos', 'egresos', 'fas fa-file-invoice');
+
         $this->createSubMenu($reportes, 'Crear Reporte', 'reportes/create', 'fas fa-file-alt');
         $this->createSubMenu($reportes, 'Listar Reportes', 'reportes', 'fas fa-chart-line');
         $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas/estudiantes', 'fas fa-chart-pie');
@@ -125,7 +128,7 @@ class DatabaseSeeder extends Seeder
                 'password_reset' => null,
                 'rol_id' => 1, // Asegúrate de que este rol exista
                 'tematica_id' => 2, // Asegúrate de que esta temática exista
-                
+
             ],
 
             // Agrega más usuarios según sea necesario

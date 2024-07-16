@@ -223,8 +223,8 @@ CREATE TABLE carreras_materias (
     FOREIGN KEY(materia_sigla) REFERENCES materias(sigla),
     FOREIGN KEY(carrera_sigla) REFERENCES carreras(sigla)
 );
-
-CREATE TABLE estudiantes_carrera (
+ 
+CREATE TABLE carrera_estudiantes (
     id SERIAL PRIMARY KEY,
     fecha_inscripcion DATE NOT NULL,
     estudiante_ci VARCHAR(20)  NOT NULL,

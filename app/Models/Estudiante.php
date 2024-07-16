@@ -21,4 +21,14 @@ class Estudiante extends Model
     {
         return $this->belongsTo(User::class, 'usuario_id');
     }
+
+    public function carrera_estudiantes()
+    {
+        return $this->hasMany(CarreraEstudiante::class,'estudiante_ci','ci');
+    }
+
+    public function materias()
+    {
+        return $this->hasMany(MateriaEstudiante::class, 'estudiante_ci', 'ci');
+    }
 }

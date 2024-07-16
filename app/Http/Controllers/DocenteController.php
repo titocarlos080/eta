@@ -28,6 +28,8 @@ class DocenteController extends Controller
     // Almacena un nuevo docente en la base de datos
     public function store(Request $request)
     {
+
+        
         // Valida los datos del formulario
         $request->validate([
             'ci' => 'required|string|max:20|unique:docentes,ci',
@@ -44,7 +46,7 @@ class DocenteController extends Controller
             $user = User::create([
                 'name' => $request->nombre,
                 'email' => $request->email,
-                'password' => Hash::make($request->password), // Usa la contraseña ingresada
+                'password' => Hash::make($request->ci), // Usa la contraseña ingresada
                 'rol_id' => 2, 
                 'tematica_id' => 1, 
             ]);

@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <strong>Detalles de la Inscripción</strong>
+                    <strong>Inscripción {{ $inscripcion->estudiante_ci }} - {{ $inscripcion->carrera_sigla }}</strong>
                     <a class="btn" href="{{ route('carrera_estudiantes.index') }}">
                         <i class="fas fa-sync fa-md fa-fw"></i>
                     </a>
@@ -21,15 +21,15 @@
             <div class="card-body">
                 <dl class="row">
                     <dt class="col-sm-4">Fecha de Inscripción:</dt>
-                    <dd class="col-sm-8">{{ $carreraEstudiante->fecha_inscripcion }}</dd>
+                    <dd class="col-sm-8">{{ $inscripcion->fecha_inscripcion }}</dd>
                     <dt class="col-sm-4">CI del Estudiante:</dt>
-                    <dd class="col-sm-8">{{ $carreraEstudiante->estudiante_ci }}</dd>
+                    <dd class="col-sm-8">{{ $inscripcion->estudiante->ci }}  - {{ $inscripcion->estudiante->nombre }} </dd>
                     <dt class="col-sm-4">Sigla de la Carrera:</dt>
-                    <dd class="col-sm-8">{{ $carreraEstudiante->carrera_sigla }}</dd>
+                    <dd class="col-sm-8">{{ $inscripcion->carrera_sigla }}</dd>
                 </dl>
             </div>
             <div class="card-footer d-flex justify-content-end">
-                <a href="{{ route('carrera_estudiantes.index') }}" class="btn btn-secondary">Volver a la Lista</a>
+                <a href="{{ route('carrera_estudiantes.index') }}" class="btn btn-secondary">Volver  </a>
             </div>
         </div>
     </div>

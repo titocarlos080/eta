@@ -28,5 +28,9 @@ class Carrera extends Model
     public function carrera_materias()
     {
         return $this->hasMany(CarreraMateria::class,'carrera_sigla','sigla');
+    } 
+    public function carrera_estudiantes()
+    {
+        return $this->hasMany(CarreraEstudiante::class,'carrera_sigla','sigla');
     }
 }

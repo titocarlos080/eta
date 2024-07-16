@@ -31,4 +31,9 @@ class GrupoMateria extends Model
     {
         return $this->belongsTo(Docente::class, 'docente_ci', 'ci');
     }
+    public function estudiantes()
+    {
+        return $this->hasMany(MateriaEstudiante::class, 'grupos_materias_sigla', 'sigla');
+    }
+
 }
