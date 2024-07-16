@@ -90,7 +90,7 @@ class EstudianteController extends Controller
         'sexo' => 'required|in:M,F',
         'fecha_nacimiento' => 'required|date',
      ]);
-
+    
     $estudiante->update($request->all());
 
     return redirect()->route('estudiantes.index')

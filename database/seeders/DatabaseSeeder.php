@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
         
         $this->createSubMenu($reportes, 'Crear Reporte', 'reportes/create', 'fas fa-file-alt');
         $this->createSubMenu($reportes, 'Listar Reportes', 'reportes', 'fas fa-chart-line');
-        $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas', 'fas fa-chart-pie');
+        $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas/estudiantes', 'fas fa-chart-pie');
 
         $this->createSubMenu($configuraciones, 'Permisos', 'permisos', 'fas fa-user-shield');
         $this->createSubMenu($configuraciones, 'Roles', 'roles', 'fas fa-user-tag');
@@ -121,12 +121,12 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Veronica Antezana',
                 'email' => 'vero@gmail.com',
-                'password' => Hash::make('1234'), // Asegúrate de usar Hash para encriptar la contraseña
+                'password' => Hash::make('1234'),
                 'password_reset' => null,
-                'rol_id' => 2, // Asegúrate de que este rol exista
+                'rol_id' => 1, // Asegúrate de que este rol exista
                 'tematica_id' => 2, // Asegúrate de que esta temática exista
-
-            ]
+                
+            ],
 
             // Agrega más usuarios según sea necesario
         ]);

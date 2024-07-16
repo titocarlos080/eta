@@ -20,6 +20,7 @@ use App\Http\Controllers\PagosController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleMenuController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EstadisticasController;
 use App\Models\Materia;
 
 /*
@@ -71,4 +72,9 @@ Route::middleware(['auth.eta'])->group(function () {
      Route::get('/pagos/lista', [PagosController::class, 'lista'])->name('pagos.lista');
     Route::resource('pagos', PagosController::class);
     Route::get('getEstudianteInfo/{id}', [PagosController::class, 'getEstudianteInfo']);
+
+    //estadisticas
+    Route::get('/estadisticas/estudiantes', [EstadisticasController::class, 'estudiantesPorCarrera'])->name('estadisticas.estudiantes');
+    Route::get('/estadisticas/estudiantes_materia', [EstadisticasController::class, 'mostrarEstudiantesPorMateria']);
+    Route::get('/estadisticas/egresos_gestion', [EstadisticasController::class, 'mostrarEgresosPorGestion']);
 });
