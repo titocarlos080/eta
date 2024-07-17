@@ -68,8 +68,10 @@ class DatabaseSeeder extends Seeder
         $this->createSubMenu($pagos, 'Listar Pagos', 'pagos', 'fas fa-money-bill-wave');
         $this->createSubMenu($pagos, 'Pagar QR', 'pagos/qr', 'fas fa-qrcode');
         $this->createSubMenu($pagos, 'Pagos por QR', 'pagos/lista-qr', 'fas fa-receipt');
-        $this->createSubMenu($pagos, 'Egresos', 'egresos', 'fas fa-file-invoice');
-
+        $this->createSubMenu($pagos, 'Crear Egreso', 'egresos/create', 'fas fa-comment-dollar');
+        $this->createSubMenu($pagos, 'Listar Egresos', 'egresos', 'fas fa-file-invoice-dollar');
+       
+    
         $this->createSubMenu($reportes, 'Crear Reporte', 'reportes/create', 'fas fa-file-alt');
         $this->createSubMenu($reportes, 'Listar Reportes', 'reportes', 'fas fa-chart-line');
         $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas/estudiantes', 'fas fa-chart-pie');

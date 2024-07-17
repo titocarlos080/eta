@@ -23,6 +23,7 @@ use App\Http\Controllers\RoleMenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\MateriaEstudianteController;
+use App\Http\Controllers\EgresoController;
 use App\Models\Materia;
 
 /*
@@ -80,5 +81,9 @@ Route::middleware(['auth.eta'])->group(function () {
     //estadisticas
     Route::get('/estadisticas/estudiantes', [EstadisticasController::class, 'estudiantesPorCarrera'])->name('estadisticas.estudiantes');
     Route::get('/estadisticas/estudiantes_materia', [EstadisticasController::class, 'mostrarEstudiantesPorMateria']);
-    Route::get('/estadisticas/egresos_gestion', [EstadisticasController::class, 'mostrarEgresosPorGestion']);
+    Route::get('/estadisticas/egresos_gestion', [EstadisticasController::class, 'egresosPorGestion']);
+
+    //egresos
+    Route::resource('egresos', EgresoController::class);
+    Route::post('egresos/{egreso}/anular', [EgresoController::class, 'anular'])->name('egresos.anular');    
 });
