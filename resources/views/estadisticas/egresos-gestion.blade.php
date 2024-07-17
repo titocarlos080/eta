@@ -1,19 +1,28 @@
 @extends('adminlte::page')
 
+@section('title', 'Estadísticas de Egresos por Gestión')
+
 @section('content')
     <div class="container">
-        <h1>Egresos por Gestión</h1>
+        <h1>Estadísticas de Egresos por Gestión</h1>
         
         <div class="form-group">
+            <label for="statisticType">Tipo de Estadística:</label>
+            <select id="statisticType" class="form-control" style="width: 200px; display: inline-block;" onchange="location = this.value;">
+                <option value="{{ url('/estadisticas/estudiantes') }}">Estudiantes por Carrera</option>
+                <option value="{{ url('/estadisticas/estudiantes_materia') }}">Estudiantes por Materia</option>
+                <option value="{{ url('/estadisticas/egresos_gestion') }}" selected>Egresos por Gestión</option>
+            </select>
+
             <label for="chartType">Tipo de Gráfica:</label>
-            <select id="chartType" class="form-control" style="width: 200px;">
+            <select id="chartType" class="form-control" style="width: 200px; display: inline-block;">
                 <option value="bar">Barra</option>
                 <option value="line">Lineal</option>
             </select>
         </div>
 
         <div class="chart-container" style="position: relative; height:60vh; width:100vw">
-            <canvas id="egresosPorGestionChart"></canvas>
+            <canvas id="chartCanvas"></canvas>
         </div>
     </div>
 
@@ -22,7 +31,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('egresosPorGestionChart').getContext('2d');
+            var ctx = document.getElementById('chartCanvas').getContext('2d');
             var data = @json($data);
 
             var labels = data.map(function(item) {
@@ -47,8 +56,8 @@
                         datasets: [{
                             label: 'Egresos por Gestión',
                             data: counts,
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -71,7 +80,13 @@
         });
     </script>
 @endsection
-
+@section('footer')
+    <div class="container">
+        <footer class="footer">
+            <p class="text-center">Número de visitas: {{ $visitas }}</p>
+        </footer>
+    </div>
+@stop
 @push('scripts')
     <script src="{{ asset('js/theme.js') }}"></script>
 @endpush

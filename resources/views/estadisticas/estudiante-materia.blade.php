@@ -72,6 +72,13 @@
     </script>
 @endsection
 
+@section('footer')
+    <div class="container">
+        <footer class="footer">
+            <p class="text-center">Número de visitas: {{ $visitas }}</p>
+        </footer>
+    </div>
+@stop
 @push('scripts')
     <script src="{{ asset('js/theme.js') }}"></script>
 @endpush
