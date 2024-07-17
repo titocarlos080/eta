@@ -2,7 +2,7 @@
 
 @section('title', 'Grupo-Materia')
 
-@section('content')  
+@section('content')
 <section class="content">
     <div class="container-fluid p-4">
         <div class="card">
@@ -15,6 +15,12 @@
                                 <i class="fas fa-sync fa-md fa-fw"></i>
                             </a>
                         </h3>
+                         
+                            <a class="btn btn-success" href="{{ route('grupo_materia_horarios.index') }}">
+                              HORARIOS  <i class="fas fa-calendar-alt fa-md fa-fw"></i>
+                            </a>
+                        
+
                     </div>
 
                     <div class="col-xs">
@@ -88,11 +94,11 @@
 @include('grupo_materias.edit')
 @stop
 @section('footer')
-    <div class="container">
-        <footer class="footer">
-            <p class="text-center">Número de visitas: {{ $visitas }}</p>
-        </footer>
-    </div>
+<div class="container">
+    <footer class="footer">
+        <p class="text-center">Número de visitas: {{ $visitas }}</p>
+    </footer>
+</div>
 @stop
 <script>
     function editGrupoMateria(sigla) {

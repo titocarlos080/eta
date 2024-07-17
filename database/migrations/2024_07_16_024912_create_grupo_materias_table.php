@@ -19,9 +19,7 @@ class CreateGrupoMateriasTable extends Migration
             $table->string('materia_sigla'); // Foreign key to materias table
             $table->string('carrera_sigla');  // Foreign key to carreras table
             $table->string('docente_ci')->nullable(); // Foreign key to docentes table, allow null
-
             $table->timestamps(); // Add created_at and updated_at columns
-
             // Foreign Key Constraints
             $table->foreign('materia_sigla')->references('sigla')->on('materias');
             $table->foreign('carrera_sigla')->references('sigla')->on('carreras');

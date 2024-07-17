@@ -10,7 +10,7 @@ class MateriaEstudiante extends Model
     use HasFactory;
 
     // Especifica la tabla si el nombre no sigue la convención plural
-    protected $table = 'materia_estudiante';
+    protected $table = 'estudiante_materia';
     protected $fillable = [
         'fecha',
         'grupos_materias_sigla',

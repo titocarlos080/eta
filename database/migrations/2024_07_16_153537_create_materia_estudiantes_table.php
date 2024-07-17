@@ -13,7 +13,7 @@ class CreateMateriaEstudiantesTable extends Migration
      */
     public function up()
     {
-        Schema::create('materia_estudiante', function (Blueprint $table) {
+        Schema::create('estudiante_materia', function (Blueprint $table) {
             $table->id(); // Agrega una columna 'id' con auto-incremento
             $table->date('fecha'); // Columna para la fecha
             $table->string('grupos_materias_sigla', 10); // Columna para la sigla de grupos de materias
@@ -42,6 +42,6 @@ class CreateMateriaEstudiantesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materia_estudiante');
+        Schema::dropIfExists('estudiante_materia');
     }
 }

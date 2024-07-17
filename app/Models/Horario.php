@@ -14,6 +14,10 @@ class Horario extends Model
         'hora_inicio',
         'hora_fin',
     ];
+    public function grupoMateriaHorarios()
+    {
+        return $this->hasMany(GrupoMateriaHorario::class, 'horario_id', 'id');
+    }
     
 }
 // CREATE TABLE horarios (

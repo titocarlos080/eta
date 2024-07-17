@@ -22,6 +22,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleMenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EstadisticasController;
+use App\Http\Controllers\GrupoMateriaHorarioController;
 use App\Http\Controllers\MateriaEstudianteController;
 use App\Models\Materia;
 
@@ -62,6 +63,7 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('carrera_estudiantes', CarreraEstudianteController::class);
     Route::resource('materia_estudiantes', MateriaEstudianteController::class);
     Route::resource('grupo_materias', GrupoMateriaController::class);
+    Route::resource('grupo_materia_horarios', GrupoMateriaHorarioController::class);
      
     Route::resource('roles', RoleController::class);
     Route::resource('usuarios', UserController::class);
