@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Egreso;
 use App\Models\Gestion;
 use App\Models\Pagina;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class EgresoController extends Controller
@@ -81,6 +82,14 @@ class EgresoController extends Controller
         $egreso->update(['anulado' => true]);
 
         return response()->json(['success' => true]);
+     }
+
+     public function generatePDF()
+     {
+         $egresos = Egreso::all();
+         $pdf = Pdf::loadView('egresos.pdf', compact('egresos'));
+ 
+         return $pdf->download('egresos.pdf');
      }
     public function show(Egreso $egreso)
     {

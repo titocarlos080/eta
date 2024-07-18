@@ -76,7 +76,7 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('roles', RoleController::class);
    
     Route::resource('usuarios', UserController::class);
-   
+    Route::get('/estudiantes/pdf', [EstudianteController::class, 'generatePDF'])->name('estudiantes.pdf');
     Route::resource('estudiantes', EstudianteController::class); 
   //  Route::get('/search-estudiantes', [EstudianteController::class, 'search'])->name('search.estudiantes');
     Route::resource('administrativos', AdministrativoController::class);
@@ -107,8 +107,12 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::post('/reportes/estudiantes-por-carrera', [ReporteController::class, 'estudiantesPorCarrera'])->name('reporte.estudiantes_por_carrera');
     Route::post('/reportes/materias-por-estudiante', [ReporteController::class, 'materiasPorEstudiante'])->name('reporte.materias_por_estudiante');
     //egresos
+    Route::get('/egresos/pdf', [EgresoController::class, 'generatePDF'])->name('egresos.pdf');
     Route::resource('egresos', EgresoController::class);
+  
     Route::post('egresos/{egreso}/anular', [EgresoController::class, 'anular'])->name('egresos.anular');
+    
+   
 
     //ofertas
     
