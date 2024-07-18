@@ -8,8 +8,7 @@
             <label for="statisticType">Tipo de Estadística:</label>
             <select id="statisticType" class="form-control" style="width: 200px; display: inline-block;" onchange="location = this.value;">
                 <option value="{{ url('/estadisticas/estudiantes') }}" selected>Estudiantes por Carrera</option>
-                <option value="{{ url('/estadisticas/estudiantes_materia') }}">Estudiantes por Materia</option>
-                <option value="{{ url('/estadisticas/egresos_gestion') }}">Egresos por Gestión</option>
+                 <option value="{{ url('/estadisticas/egresos_gestion') }}">Egresos por Gestión</option>
             </select>
 
             <label for="chartType">Tipo de Gráfica:</label>

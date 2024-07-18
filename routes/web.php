@@ -72,7 +72,7 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('materia_estudiantes', MateriaEstudianteController::class);
     Route::resource('grupo_materias', GrupoMateriaController::class);
     Route::resource('grupo_materia_horarios', GrupoMateriaHorarioController::class);
-
+     
     Route::resource('roles', RoleController::class);
    
     Route::resource('usuarios', UserController::class);

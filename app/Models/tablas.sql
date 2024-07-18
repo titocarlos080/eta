@@ -181,6 +181,7 @@ CREATE TABLE carrera_materias (
 -- Tabla grupo_materias
 CREATE TABLE grupo_materias (
     sigla VARCHAR(255) PRIMARY KEY,
+    grupo_sigla VARCHAR(255)  ,
     descripcion VARCHAR(255),
     materia_sigla VARCHAR(255),
     carrera_sigla VARCHAR(255),
@@ -290,6 +291,8 @@ CREATE TABLE ofertas (
     fecha DATE NOT NULL,
     concepto VARCHAR(255) NOT NULL,
     gestion_codigo INT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(gestion_codigo) REFERENCES gestiones(codigo)
  
  );

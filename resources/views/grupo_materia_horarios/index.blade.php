@@ -56,16 +56,14 @@
                         @foreach($grupoHorarios as $grupoMateriaHorario)
                         <tr>
                             <td>{{ $grupoMateriaHorario->grupoMateria->sigla }} - {{ $grupoMateriaHorario->grupoMateria->descripcion }}</td>
-                            <td>{{ $grupoMateriaHorario->horario->descripcion }}</td>
+                            <td>{{ $grupoMateriaHorario->horario->hora_inicio }}-{{ $grupoMateriaHorario->horario->hora_fin }}</td>
                             <td>{{ $grupoMateriaHorario->dia->nombre }}</td>
                             <td>
                                 <a href="{{ route('grupo_materia_horarios.show', $grupoMateriaHorario->id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
                                     <i class="fas fa-eye"></i>
-                                </a>
+                                </a> 
 
-                                <button type="button" class="btn btn-warning btn-sm" onclick="editGrupoMateriaHorario('{{ $grupoMateriaHorario->id }}')" data-toggle="tooltip" data-placement="top" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </button>
+                                
 
                                 <form action="{{ route('grupo_materia_horarios.destroy', $grupoMateriaHorario->id) }}" method="POST" class="d-inline">
                                     @csrf

@@ -45,7 +45,7 @@
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>{{$cantidadEstudiantes}}</h3>
-                    <p>Estudiantes Registrados</p>
+                    <p>Usuarios Registrados</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-user-plus"></i>

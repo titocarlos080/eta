@@ -107,7 +107,14 @@ INSERT INTO role_menus (id, role_id, menu_id, created_at, updated_at) VALUES
 (37, 1, 37, '2024-07-16 18:41:12', '2024-07-16 18:41:12'),
 (38, 1, 38, '2024-07-16 18:41:12', '2024-07-16 18:41:12'),
 (39, 1, 39, '2024-07-16 18:41:12', '2024-07-16 18:41:12');
- 
+
+
+--para docentes
+(25, 2, 25, '2024-07-16 18:41:12', '2024-07-16 18:41:12'),
+
+--para estudiantes
+(25, 3, 25, '2024-07-16 18:41:12', '2024-07-16 18:41:12'),
+
 
  -- Insertar 10 usuarios con rol de Admin
 INSERT INTO usuarios (name, email, password, rol_id, created_at, updated_at) VALUES
