@@ -10,14 +10,20 @@ use Illuminate\Support\Facades\Hash;
 
 class EstudianteController extends Controller
 {
-    public function index()
-    {     Pagina::contarPagina(request()->path());
+    public function index(Request $request)
+    {     
+        
+        Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-        
+        $search= $request->get('search');
+        $estudiantes = Estudiante::where('ci', 'like', "%{$search}%")
+        ->orWhere('nombre', 'like', "%{$search}%")
+        ->orWhere('apellido_pat', 'like', "%{$search}%")
+        ->get();
+        //$estudiantes = Estudiante::all();
 
-        $estudiantes = Estudiante::all();
-        return view('estudiantes.index', compact('estudiantes','visitas') );
+        return view('estudiantes.index', compact('estudiantes','visitas','search') );
     }
 
     public function create()

@@ -4,7 +4,7 @@
 
 @section('content_header')
 <div class="container-fluid">
-<strong> DASHBOARD</strong>
+    <strong> DASHBOARD</strong>
 </div>
 @stop
 
@@ -99,6 +99,9 @@
     <!-- /.row -->
 </div><!-- /.container-fluid -->
 @stop
+@push('scripts')
+<script src="{{ asset('js/theme.js') }}"></script>
+@endpush
 
 @section('footer')
 <footer class="footer">
@@ -106,6 +109,11 @@
 </footer>
 @stop
 
+
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush
 
 <script src="{{ asset('js/theme.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -179,4 +187,4 @@
             }
         });
     });
-</script>
+    </script>

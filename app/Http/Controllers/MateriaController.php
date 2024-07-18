@@ -13,32 +13,50 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {     Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-
-        $materias = Materia::all();
- 
-
-         return view('materias.index',compact('materias','visitas'));
+        $search= $request->get('search');
+        $materias = Materia::where('sigla', 'like', "%{$search}%")
+        ->orWhere('descripcion', 'like', "%{$search}%")
+        ->get();
+         return view('materias.index',compact('materias','visitas','search'));
     }
+
+    /**public function index(Request $request)
+    {     
+        
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+        $search= $request->get('search');
+        $estudiantes = Estudiante::where('ci', 'like', "%{$search}%")
+        ->orWhere('nombre', 'like', "%{$search}%")
+        ->orWhere('apellido_pat', 'like', "%{$search}%")
+        ->get();
+        //$estudiantes = Estudiante::all();
+
+        return view('estudiantes.index', compact('estudiantes','visitas','search') );
+    } */
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-
-        $materias = Materia::all();
+        $search= $request->get('search');
+        $materias = Materia::where('sigla', 'like', "%{$search}%")
+        ->orWhere('descripcion', 'like', "%{$search}%")
+        ->get();
  
 
-         return view('materias.index',compact('materias','visitas'));
+         return view('materias.index',compact('materias','visitas','search'));
     }
 
     /**

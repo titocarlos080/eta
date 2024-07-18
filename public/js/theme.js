@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleThemeKids() {
          if (bodyClassList.contains('theme-kids')) {
              bodyClassList.remove('theme-kids');
-            localStorage.removeItem('theme-kids');
+            localStorage.removeItem('theme');
          } else {
              bodyClassList.remove('theme-teens', 'theme-adults');
              bodyClassList.add('theme-kids');
-             localStorage.setItem('theme-kids', 'theme-kids');
+             localStorage.setItem('theme', 'theme-kids');
              soundKids.play();
          }
     }   
@@ -57,24 +57,24 @@ document.addEventListener('DOMContentLoaded', function () {
         darkModeToggle.addEventListener('click', function () {
             bodyClassList.remove('theme-teens', 'theme-adults', 'theme-kids');
             localStorage.removeItem('theme');
-            localStorage.removeItem('theme-kids');
+           
         });
     }
 
     // Aplicar tema guardado
     const savedTheme = localStorage.getItem('theme');
-    const savedThemeKids = localStorage.getItem('theme-kids');
     if (savedTheme) {
         bodyClassList.add(savedTheme);
         if (savedTheme === 'theme-teens') {
             themeToggle.querySelector('i').classList.replace('fa-user-tie', 'fa-child');
         } else if (savedTheme === 'theme-adults') {
             themeToggle.querySelector('i').classList.replace('fa-child', 'fa-user-tie');
-        } 
-    }else if (savedThemeKids) {
-        bodyClassList.add(savedThemeKids);
+        } else if (savedTheme === 'theme-kids') {
+            if (themeToggle.querySelector('i')) {
+            themeToggle.querySelector('i').classList.replace('fa-child', 'fa-user-tie');
+            }
+        }
     }
-
    
   // Aplicar tema a los modales cuando se abran
   const modalElements = document.querySelectorAll('.modal');

@@ -15,14 +15,15 @@ class NivelesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {  Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-        
-        $niveles= Niveles::orderby('id', 'asc')->paginate(9);
+        $search = $request->get('search');
+        $niveles= Niveles::where('nombre', 'like', '%'.$search.'%')->
+        orderby('id', 'asc')->paginate(9);
 
-        return view('niveles.index',compact('niveles','visitas'));
+        return view('niveles.index',compact('niveles','visitas','search'));
     }
 
     /**

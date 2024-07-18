@@ -36,3 +36,10 @@
     </div>
 </section>
 @stop
+@push('scripts')
+<script src="{{ asset('js/theme.js') }}"></script>
+@endpush
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush

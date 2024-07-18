@@ -13,25 +13,30 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::all();
+        //$usuarios = User::all();
         $roles = Role::all();
         Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
+        $search= $request->get('search');
+        $usuarios = User::where('name', 'like', "%{$search}%")
+        ->orWhere('email', 'like', "%{$search}%")
+        ->get();
 
-        return view('users.index', compact('roles', 'usuarios','visitas'));
+        return view('users.index', compact('roles', 'usuarios','visitas','search') );
+       
     }
 
-    public function create()
+    public function create(Request $request)
     {      $usuarios = User::all();
         $roles = Role::all();
         Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-
-        return view('users.index', compact('roles', 'usuarios','visitas'));
+        $search= $request->get('search');
+        return view('users.index', compact('roles', 'usuarios','visitas','search') );
     }
     public function store(Request $request)
     {

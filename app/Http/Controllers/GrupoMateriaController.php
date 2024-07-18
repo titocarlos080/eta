@@ -19,16 +19,19 @@ class GrupoMateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-
-        $grupoMaterias = GrupoMateria::all();
+        $search= $request->get('search');
+        $grupoMaterias = GrupoMateria::where('sigla', 'like', "%{$search}%")
+        ->orWhere('materia_sigla', 'like', "%{$search}%")->orWhere('docente_ci', 'like', "%{$search}%")
+        ->orWhere('carrera_sigla', 'like', "%{$search}%")
+        ->get();
         $carreraMaterias = CarreraMateria::all(); 
         $docentes = Docente::all();
-        return view('grupo_materias.index', compact('grupoMaterias','visitas','carreraMaterias','docentes'));
+        return view('grupo_materias.index', compact('grupoMaterias','visitas','carreraMaterias','docentes','search') );
     }
 
     /**

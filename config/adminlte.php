@@ -66,7 +66,7 @@ return [
     */
 
     'logo' => '<b>ETA</b>Hans Roth',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/eta.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -297,8 +297,10 @@ return [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'buscar',
+            'text'         => 'Buscar',
+            'id'           => 'navbar-search-input',
             'topnav_right' => true,
+           
         ],
 
         [

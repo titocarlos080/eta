@@ -45,6 +45,7 @@
 .theme-adults .modal-footer{
     background-color: #afad7d !important; /* Azul profesional */
     color: #0f0101 !important; /* Texto negro */
+    font-size:  x-large;
 }
 
 .theme-adults .main-header .navbar,
@@ -52,34 +53,68 @@
 .theme-adults .main-footer {
     background-color: #afad7d !important; /* Azul oscuro */
     color: #0f0101 !important; /* Texto negro */
+    font-size: large;
 }
 
 /* Estilos para el tema de niños */
 .theme-kids body,
-.theme-kids .content-wrapper,
+
 .theme-kids .main-header,
 .theme-kids .main-sidebar,
 .theme-kids .main-footer,
 .theme-kids .card,
 .theme-kids .navbar,
-.theme-kids .sidebar,
+
 .theme-kids .table,
 .theme-kids .card-header,
 .theme-kids .card-body,
 .theme-kids .modal-header,
-.theme-kids .modal-body,.nav-link  
+.theme-kids .modal-body,
 .theme-kids .modal-footer {
     background-color: #e8e820 !important; /* Amarillo brillante */
     color: #000000 !important; /* Texto negro */
     font-family: 'Courier New', Courier, monospace;
-
     font-size: large;
+    
+   
+    
+   
 }
-
-.theme-kids .main-header .navbar,.nav-link  
+.theme-kids .sidebar{
+    background-color: #3c3c0d !important;
+    background-image: url('../images/ball.png');
+    background-repeat: no-repeat;
+    background-size: 45%;
+    background-position: center, top left, top right, bottom left, bottom right;
+}
+.theme-kids .content-wrapper{
+    background-color: #e8e820 !important; /* Amarillo brillante */
+    color: #000000 !important; /* Texto negro */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    background-image: url('../images/ball.png');
+    background-repeat: no-repeat;
+    background-size: 45%;
+    background-position: center, top left, top right, bottom left, bottom right;
+    
+}
+.theme-kids .main-header .navbar,
 .theme-kids .main-sidebar,
 .theme-kids .main-footer {
     background-color: #f1bf62 !important; /* Naranja */
-    color: #000000 !important; /* Texto negro */
+    color: white !important; /* Texto blanco */
+    font-weight: bold;
 }
 
+/* Ajustar el tamaño y estilo del texto del menú en el tema de niños */
+.theme-kids .nav-link {
+    color: white !important;
+    font-weight: bold;
+    font-size: medium;
+     
+}
+.theme-kids .nav-link.active {
+    background-color: #c9b500 !important; /* Color más oscuro para el enlace activo */
+    color: #fff !important; /* Texto blanco */
+    font-weight: bold;
+}

@@ -11,14 +11,32 @@ use Illuminate\Support\Facades\Hash;
 class AdministrativoController extends Controller
 {
     // Muestra la lista de administrativos
-    public function index()
+    public function index(Request $request)
     {     Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-        $administrativos = Administrativo::all(); // Obtiene todos los administrativos
-        return view('administrativos.index', compact('administrativos','visitas'));
+        $search= $request->get('search');
+        $administrativos = Administrativo::where('ci', 'like', "%{$search}%")
+        ->orWhere('nombre', 'like', "%{$search}%")
+        ->orWhere('apellido_pat', 'like', "%{$search}%")
+        ->get();
+        return view('administrativos.index', compact('administrativos','visitas','search') );
     }
+/**ublic function index(Request $request)
+    {     
+        
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+        $search= $request->get('search');
+        $estudiantes = Estudiante::where('ci', 'like', "%{$search}%")
+        ->orWhere('nombre', 'like', "%{$search}%")
+        ->orWhere('apellido_pat', 'like', "%{$search}%")
+        ->get();
+        //$estudiantes = Estudiante::all();
 
+        return view('estudiantes.index', compact('estudiantes','visitas','search') );
+    } */
     // Muestra el formulario para crear un nuevo administrativo
     public function create()
     {     Pagina::contarPagina(request()->path());

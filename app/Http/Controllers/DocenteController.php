@@ -11,13 +11,19 @@ use Illuminate\Support\Facades\Hash;
 class DocenteController extends Controller
 {
     // Muestra la lista de docentes
-    public function index()
-    {
-        Pagina::contarPagina(request()->path());
+
+   
+    public function index(Request $request)
+    {     Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-        $docentes = Docente::all(); // Obtiene todos los docentes
-        return view('docentes.index', compact('docentes', 'visitas'));
+        $search= $request->get('search');
+       // $docentes = Docente::all(); // Obtiene todos los docentes
+        $docentes = Docente::where('ci', 'like', "%{$search}%")
+        ->orWhere('nombre', 'like', "%{$search}%")
+        ->orWhere('apellido_pat', 'like', "%{$search}%")
+        ->get();
+        return view('docentes.index', compact('docentes','visitas','search') );
     }
 
     // Muestra el formulario para crear un nuevo docente

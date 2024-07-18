@@ -16,10 +16,12 @@
                             </a>
                         </h3>
                     </div>
-
+                                   
                     <div class="col-xs">
                         <button data-toggle="modal" data-target="#formCreateModal" class="btn btn-primary" type="button">Nuevo</button>
                     </div>
+                  
+                    
                     <div class="modal fade" id="formCreateModal" tabindex="-1" aria-labelledby="formCreateLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -34,9 +36,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>          
                 </div>
-
+                <form class="d-flex w-50 "  role="search">
+                    <input name="search" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" value="{{$search}}">
+                    <button class="btn btn-success" type="submit">Buscar</button>
+                </form>
             </div>
 
             <div class="card-body p-0">

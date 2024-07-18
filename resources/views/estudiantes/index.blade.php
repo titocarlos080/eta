@@ -11,9 +11,14 @@
                     <div class="col-md-6">
                         <h3 class="card-title"><strong>LISTA DE ESTUDIANTES</strong></h3>
                     </div>
+                   
                     <div class="col-md-6 text-right">
                         <a href="{{ route('estudiantes.create') }}" class="btn btn-primary">Nuevo</a>
                     </div>
+                    <form class="d-flex w-50 float-right"  role="search">
+                        <input name="search" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" value="{{$search}}">
+                        <button class="btn btn-success" type="submit">Buscar</button>
+                    </form>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -73,3 +78,12 @@
         </footer>
     </div>
 @stop
+
+
+@push('scripts')
+    <script src="{{ asset('js/theme.js') }}"></script>
+@endpush
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush
