@@ -18,12 +18,16 @@
                     </div>
                     <div class="col-12 col-md-6 text-right">
                         <a href="{{ route('egresos.create') }}" class="btn btn-primary" type="button">Nuevo</a>
+                        <a href="{{ route('egresos.pdf') }}" class="btn btn-warning" type="button">Descargar PDF</a>
                     </div>
+                   
                 </div>
                 <form class="d-flex w-50 "  role="search">
                     <input name="search" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" value="{{$search}}">
                     <button class="btn btn-success" type="submit">Buscar</button>
                 </form>
+                <br>
+              
             </div>
 
             <div class="card-body p-0">
@@ -45,6 +49,7 @@
                             <td>{{ $egreso->fecha }}</td>
                             <td>{{ $egreso->gestion->descripcion }}</td>
                             <td>
+                                
                                 @if(!$egreso->anulado)
                                 <form action="{{ route('egresos.anular', $egreso->id) }}" method="POST" class="d-inline anular-form" data-id="{{ $egreso->id }}">
                                     @csrf

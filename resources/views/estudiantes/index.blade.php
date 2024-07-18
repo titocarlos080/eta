@@ -14,6 +14,7 @@
                    
                     <div class="col-md-6 text-right">
                         <a href="{{ route('estudiantes.create') }}" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('estudiantes.pdf') }}" class="btn btn-warning" type="button">Descargar PDF</a>
                     </div>
                     <form class="d-flex w-50 float-right"  role="search">
                         <input name="search" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" value="{{$search}}">

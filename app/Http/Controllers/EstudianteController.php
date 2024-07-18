@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use App\Models\Pagina;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,6 +31,13 @@ class EstudianteController extends Controller
     {
         
         return view('estudiantes.create' );
+    }
+    public function generatePDF()
+    {
+        $estudiantes = Estudiante::all();
+        $pdf = Pdf::loadView('estudiantes.pdf', compact('estudiantes'));
+
+        return $pdf->download('estudiantes.pdf');
     }
 
     public function store(Request $request)
