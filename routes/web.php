@@ -24,6 +24,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\MateriaEstudianteController;
 use App\Http\Controllers\EgresoController;
+use App\Http\Controllers\OfertaController;
 use App\Models\Materia;
 
 /*
@@ -88,5 +89,13 @@ Route::middleware(['auth.eta'])->group(function () {
 
     //egresos
     Route::resource('egresos', EgresoController::class);
-    Route::post('egresos/{egreso}/anular', [EgresoController::class, 'anular'])->name('egresos.anular');    
+    Route::post('egresos/{egreso}/anular', [EgresoController::class, 'anular'])->name('egresos.anular');
+    //ofertas
+    
+    Route::get('ofertas', [OfertaController::class, 'index'])->name('ofertas.index');
+Route::get('ofertas/create', [OfertaController::class, 'create'])->name('ofertas.create');
+Route::get('ofertas/{gestionCodigo}/carreras', [OfertaController::class, 'showCarreras'])->name('ofertas.showCarreras');
+Route::get('ofertas/{carreraSigla}/materias', [OfertaController::class, 'showMaterias'])->name('ofertas.showMaterias');
+Route::resource('ofertas', OfertaController::class);
+    
 });
