@@ -72,13 +72,13 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('materia_estudiantes', MateriaEstudianteController::class);
     Route::resource('grupo_materias', GrupoMateriaController::class);
     Route::resource('grupo_materia_horarios', GrupoMateriaHorarioController::class);
-     
+
     Route::resource('roles', RoleController::class);
-   
+
     Route::resource('usuarios', UserController::class);
     Route::get('/estudiantes/pdf', [EstudianteController::class, 'generatePDF'])->name('estudiantes.pdf');
-    Route::resource('estudiantes', EstudianteController::class); 
-  //  Route::get('/search-estudiantes', [EstudianteController::class, 'search'])->name('search.estudiantes');
+    Route::resource('estudiantes', EstudianteController::class);
+    //  Route::get('/search-estudiantes', [EstudianteController::class, 'search'])->name('search.estudiantes');
     Route::resource('administrativos', AdministrativoController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('menus', MenuController::class);
@@ -109,17 +109,16 @@ Route::middleware(['auth.eta'])->group(function () {
     //egresos
     Route::get('/egresos/pdf', [EgresoController::class, 'generatePDF'])->name('egresos.pdf');
     Route::resource('egresos', EgresoController::class);
-  
+
     Route::post('egresos/{egreso}/anular', [EgresoController::class, 'anular'])->name('egresos.anular');
-    
-   
+
+
 
     //ofertas
-    
+
     Route::get('ofertas', [OfertaController::class, 'index'])->name('ofertas.index');
-Route::get('ofertas/create', [OfertaController::class, 'create'])->name('ofertas.create');
-Route::get('ofertas/{gestionCodigo}/carreras', [OfertaController::class, 'showCarreras'])->name('ofertas.showCarreras');
-Route::get('ofertas/{carreraSigla}/materias', [OfertaController::class, 'showMaterias'])->name('ofertas.showMaterias');
-Route::resource('ofertas', OfertaController::class);
-    
+    Route::get('ofertas/create', [OfertaController::class, 'create'])->name('ofertas.create');
+    Route::get('ofertas/{gestionCodigo}/carreras', [OfertaController::class, 'showCarreras'])->name('ofertas.showCarreras');
+    Route::get('ofertas/{carreraSigla}/materias', [OfertaController::class, 'showMaterias'])->name('ofertas.showMaterias');
+    Route::resource('ofertas', OfertaController::class);
 });
