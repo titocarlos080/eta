@@ -266,7 +266,30 @@ CREATE TABLE pago_carreras (
  
 );
  
+CREATE TABLE ofertas (
+    id SERIAL PRIMARY KEY,
+    gestion_codigo BIGINT NOT NULL,
+    carrera_sigla VARCHAR(255) NOT NULL,
+    materia_sigla VARCHAR(255) NOT NULL,
+    grupo_sigla VARCHAR(255) NOT NULL,
+    docente_ci VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (gestion_codigo) REFERENCES gestiones (codigo),
+    FOREIGN KEY (carrera_sigla) REFERENCES carreras (sigla),
+    FOREIGN KEY (materia_sigla) REFERENCES materias (sigla),
+    FOREIGN KEY (grupo_sigla) REFERENCES grupo_materias (sigla),
+    FOREIGN KEY (docente_ci) REFERENCES docentes (ci)
+);
 
 
 
-
+ CREATE TABLE egresos (
+    id SERIAL PRIMARY KEY,
+    monto DECIMAL(10,2) NOT NULL,
+    fecha DATE NOT NULL,
+    concepto VARCHAR(255) NOT NULL,
+    gestion_codigo INT NOT NULL,
+    FOREIGN KEY(gestion_codigo) REFERENCES gestiones(codigo)
+ 
+ );

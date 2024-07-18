@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleKids = document.getElementById('theme-toggle-kids');
     const bodyClassList = document.body.classList;
-    const soundKids = new Audio('/sounds/kids.mp3');
-    const clickSoundKids = new Audio('/sounds/LuzSolart.mp3');
+    const soundKids = new Audio('/inf513/grupo05sc/proyecto2/eta/public/sounds/kids.mp3');
+    const clickSoundKids = new Audio('/inf513/grupo05sc/proyecto2/eta/public/sounds/LuzSolart.mp3');
 
     if (!themeToggle) {
         console.error('Elemento con id "theme-toggle" no encontrado.');
