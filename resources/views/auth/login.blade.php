@@ -7,7 +7,7 @@
     <title>Login - EtaHansRoth</title>
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
-     <script src="{{ asset('vendor/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.js') }}"></script>
     <style>
         body {
             background-color: #f5f5f5;
@@ -108,7 +108,6 @@
                         </div>
                     </div>
                     @error('email')
-                     
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                     <div class="input-group mb-3">
@@ -140,7 +139,6 @@
                 <p class="mb-1">
                     <a href="#">Olvidé mi contraseña</a>
                 </p>
-
                 <!-- Botón que reproducirá el sonido -->
                 <button onclick="sonarError()">Reproducir Sonido</button>
 
@@ -148,17 +146,15 @@
                     function sonarError() {
                         var audio = new Audio("{{ asset('vendor/adminlte/dist/sounds/error.mp3 ') }}");
                         audio.play();
-
                     }
                 </script>
-
-                <!-- <p class="mb-0">
-                    <a href="#" class="text-center">Registrar un nuevo usuario</a>
-                </p> -->
             </div>
         </div>
     </div>
 
+    <div class="card">
+        <h3>Numero de visitas: {{$visitas}}</h3>
+    </div>
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pagina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,7 +10,14 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login');
+          // Contar visitas de la página actual
+          Pagina::contarPagina(request()->path());
+
+       
+           // Obtener el número de visitas para la página actual
+          $pagina = Pagina::where('path', request()->path())->first();
+          $visitas = $pagina ? $pagina->visitas : 0;
+        return view('auth.login',compact('visitas'));
     }
 
     public function login(Request $request)
