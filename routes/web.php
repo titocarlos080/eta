@@ -65,8 +65,11 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('grupo_materias', GrupoMateriaController::class);
      
     Route::resource('roles', RoleController::class);
+   
     Route::resource('usuarios', UserController::class);
-    Route::resource('estudiantes', EstudianteController::class);
+   
+    Route::resource('estudiantes', EstudianteController::class); 
+  //  Route::get('/search-estudiantes', [EstudianteController::class, 'search'])->name('search.estudiantes');
     Route::resource('administrativos', AdministrativoController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('menus', MenuController::class);

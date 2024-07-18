@@ -14,7 +14,7 @@ class EgresoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
           // Contar visitas de la página actual
         Pagina::contarPagina(request()->path());
@@ -22,9 +22,12 @@ class EgresoController extends Controller
         $gestiones = Gestion::all(); 
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-      
+        $search= $request->get('search');
+        $egresos = Egreso::where('monto', 'like', "%{$search}%")->
+        orWhere('gestion_codigo', 'like', "%{$search}%")->
+        orWhere('fecha', 'like', "%{$search}%")->get();
 
-        return view('egresos.index', compact('egresos', 'gestiones','visitas'));
+        return view('egresos.index', compact('egresos', 'gestiones','visitas','search'));
     }
 
     /**

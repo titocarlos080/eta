@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pagina;
 use App\Models\Role;
 use App\Models\RoleMenu;
 use Illuminate\Http\Request;
@@ -17,7 +18,10 @@ class RoleMenuController extends Controller
     {
         $roles = Role::all();
         $rol_menus = RoleMenu::all();
-        return view('permisos.index',compact('roles','rol_menus'));
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+        return view('permisos.index',compact('roles','rol_menus','visitas'));
 
     }
 

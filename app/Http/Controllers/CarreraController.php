@@ -14,18 +14,19 @@ class CarreraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // Contar visitas de la página actual
         Pagina::contarPagina(request()->path());
 
-        $carreras = Carrera::all();
+       
         $gestiones = Gestion::all(); // Obtén todas las gestiones
         // Obtener el número de visitas para la página actual
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-
-        return view('carreras.index', compact('carreras', 'gestiones', 'visitas'));
+        $search= $request->get('search');
+        $carreras = Carrera::where('sigla', 'like', '%'.$search.'%')->orWhere('descripcion', 'like', '%'.$search.'%')->paginate(9);
+        return view('carreras.index', compact('carreras', 'gestiones', 'visitas','search'));
     }
 
     /**
@@ -33,18 +34,19 @@ class CarreraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
           // Contar visitas de la página actual
           Pagina::contarPagina(request()->path());
 
-          $carreras = Carrera::all();
+          
           $gestiones = Gestion::all(); // Obtén todas las gestiones
           // Obtener el número de visitas para la página actual
           $pagina = Pagina::where('path', request()->path())->first();
           $visitas = $pagina ? $pagina->visitas : 0;
-  
-          return view('carreras.index', compact('carreras', 'gestiones', 'visitas'));
+          $search= $request->get('search');
+          $carreras = Carrera::where('sigla', 'like', '%'.$search.'%')->orWhere('descripcion', 'like', '%'.$search.'%')->paginate(9);
+          return view('carreras.index', compact('carreras', 'gestiones', 'visitas','search'));
       }
 
     /**

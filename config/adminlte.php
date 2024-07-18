@@ -297,8 +297,10 @@ return [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'buscar',
+            'text'         => 'Buscar',
+            'id'           => 'navbar-search-input',
             'topnav_right' => true,
+           
         ],
 
         [

@@ -8,21 +8,23 @@ use Illuminate\Http\Request;
 
 class GestionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {     Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-        $gestiones = Gestion::all();
-        return view('gestiones.index', compact('gestiones','visitas'));
+        $search= $request->get('search');
+        $gestiones = Gestion::where('descripcion', 'like', "%{$search}%")->get();
+        return view('gestiones.index', compact('gestiones','visitas','search') );
     }
 
-    public function create()
+    public function create(Request $request)
     {
         Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
-        $gestiones = Gestion::all();
-        return view('gestiones.index', compact('gestiones','visitas'));
+        $search= $request->get('search');
+        $gestiones = Gestion::where('descripcion', 'like', "%{$search}%")->get();
+        return view('gestiones.index', compact('gestiones','visitas','search') );
     }
 
     public function store(Request $request)

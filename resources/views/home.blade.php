@@ -97,7 +97,13 @@
     <!-- /.row -->
 </div><!-- /.container-fluid -->
 @stop
+@push('scripts')
+<script src="{{ asset('js/theme.js') }}"></script>
+@endpush
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+@endpush
  
 <script src="{{ asset('js/theme.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -166,5 +172,6 @@
         });
     });
 </script>
- 
+
+
  
