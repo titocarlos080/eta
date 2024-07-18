@@ -26,6 +26,7 @@ class EgresoController extends Controller
         $search= $request->get('search');
         $egresos = Egreso::where('monto', 'like', "%{$search}%")->
         orWhere('gestion_codigo', 'like', "%{$search}%")->
+        orWhere('concepto', 'like', "%{$search}%")->
         orWhere('fecha', 'like', "%{$search}%")->get();
 
         return view('egresos.index', compact('egresos', 'gestiones','visitas','search'));

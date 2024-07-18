@@ -10,11 +10,11 @@ class Gestion extends Model
     use HasFactory;
  
     protected $table = 'gestiones';
-    public $timestamps = false;
-
+ 
     protected $primaryKey = 'codigo';
-     
-    protected $fillable = [
+ 
+    public $timestamps = false;
+     protected $fillable = [
         'descripcion',
         'fecha_inicio',
         'fecha_fin',

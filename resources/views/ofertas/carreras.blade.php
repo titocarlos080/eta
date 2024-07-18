@@ -18,10 +18,10 @@
                     <div class="row">
                         @foreach($carreras as $carrera)
                         <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
+                            <div class="card mb-4">
+                                <div class="card-body text-center">
                                     <h5 class="card-title">{{ $carrera->descripcion }}</h5>
-                                    <a href="{{ route('ofertas.materias', $carrera->sigla) }}" class="btn btn-primary">Ver Materias</a>
+                                    <a href="{{ route('ofertas.showMaterias', $carrera->sigla) }}" class="btn btn-primary w-100">Ver Materias</a>
                                 </div>
                             </div>
                         </div>
@@ -34,6 +34,13 @@
 </section>
 @stop
 
+@section('footer')
+    <div class="container">
+        <footer class="footer">
+            <p class="text-center">Número de visitas: {{ $visitas }}</p>
+        </footer>
+    </div>
+@stop
 @push('scripts')
     <script src="{{ asset('js/theme.js') }}"></script>
 @endpush
