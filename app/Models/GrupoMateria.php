@@ -35,5 +35,9 @@ class GrupoMateria extends Model
     {
         return $this->hasMany(MateriaEstudiante::class, 'grupos_materias_sigla', 'sigla');
     }
+    public function grupoMateriaHorarios()
+    {
+        return $this->hasMany(GrupoMateriaHorario::class, 'grupo_sigla', 'sigla');
+    }
 
 }

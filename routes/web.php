@@ -22,8 +22,13 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleMenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EstadisticasController;
+use App\Http\Controllers\GrupoMateriaHorarioController;
 use App\Http\Controllers\MateriaEstudianteController;
 use App\Http\Controllers\EgresoController;
+
+use App\Http\Controllers\NotaController;
+use App\Http\Controllers\ReporteController;
+
 use App\Http\Controllers\OfertaController;
 use App\Models\Materia;
 
@@ -49,9 +54,9 @@ Route::get('/pagos/pdf', [PagosController::class, 'pdf'])->name('pagos.pdf');
 // Rutas protegidas por el middleware de autenticación
 Route::middleware(['auth.eta'])->group(function () {
 
-     Route::post('/consumirServicio', [ConsumirServicioController::class, 'RecolectarDatos']);
+    Route::post('/consumirServicio', [ConsumirServicioController::class, 'RecolectarDatos']);
     Route::post('/consultar', [ConsumirServicioController::class, 'ConsultarEstado']);
- 
+
 
     Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::resource('niveles', NivelesController::class);
@@ -60,11 +65,14 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('carreras', CarreraController::class);
     Route::resource('permisos', RoleMenuController::class);
     Route::resource('horarios', HorarioController::class);
+    Route::resource('notas', NotaController::class);
+
     Route::resource('carrera_materias', CarreraMateriaController::class);
     Route::resource('carrera_estudiantes', CarreraEstudianteController::class);
     Route::resource('materia_estudiantes', MateriaEstudianteController::class);
     Route::resource('grupo_materias', GrupoMateriaController::class);
-     
+    Route::resource('grupo_materia_horarios', GrupoMateriaHorarioController::class);
+
     Route::resource('roles', RoleController::class);
    
     Route::resource('usuarios', UserController::class);
@@ -74,22 +82,34 @@ Route::middleware(['auth.eta'])->group(function () {
     Route::resource('administrativos', AdministrativoController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('menus', MenuController::class);
+    Route::put('/update-nota', [NotaController::class, 'update'])->name('update-nota');
 
     // Pagos
     Route::get('/search', [PagosController::class, 'search']);
     Route::get('/pagos/qr', [PagosController::class, 'pagarQr']);
-     Route::get('/pagos/lista', [PagosController::class, 'lista'])->name('pagos.lista');
+    Route::get('/pagos/lista', [PagosController::class, 'lista'])->name('pagos.lista');
     Route::resource('pagos', PagosController::class);
     Route::get('getEstudianteInfo/{id}', [PagosController::class, 'getEstudianteInfo']);
+    Route::get('pagos_carrera/{id}', [PagosController::class, 'pagarCarrera']);
+    Route::post('pagos_carrera', [PagosController::class, 'pagarCarreraStore']);
+    Route::put('pagos_carrera', [PagosController::class, 'pagarCarreraConfirmar']);
+    Route::get('pagos_materia/{id}', [PagosController::class, 'pagarMateria']);
+    Route::get('pagos_materia/{id}', [PagosController::class, 'pagarMateria']);
+    Route::post('pagos_carrera/qr', [PagosController::class, 'pagarCarreraQR']);
 
     //estadisticas
     Route::get('/estadisticas/estudiantes', [EstadisticasController::class, 'estudiantesPorCarrera'])->name('estadisticas.estudiantes');
     Route::get('/estadisticas/estudiantes_materia', [EstadisticasController::class, 'mostrarEstudiantesPorMateria']);
     Route::get('/estadisticas/egresos_gestion', [EstadisticasController::class, 'egresosPorGestion']);
-
+    //reportes
+    Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
+    Route::post('/reportes/exportar', [ReporteController::class, 'exportar'])->name('reporte.exportar');
+    Route::post('/reportes/estudiantes-por-carrera', [ReporteController::class, 'estudiantesPorCarrera'])->name('reporte.estudiantes_por_carrera');
+    Route::post('/reportes/materias-por-estudiante', [ReporteController::class, 'materiasPorEstudiante'])->name('reporte.materias_por_estudiante');
     //egresos
     Route::resource('egresos', EgresoController::class);
     Route::post('egresos/{egreso}/anular', [EgresoController::class, 'anular'])->name('egresos.anular');
+
     //ofertas
     
     Route::get('ofertas', [OfertaController::class, 'index'])->name('ofertas.index');

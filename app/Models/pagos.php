@@ -13,10 +13,16 @@ class pagos extends Model
        'fecha',
        'monto',
        'mes_pago',
-       'estudiante_id'
+       'estudiante_ci'
     ];
     public function estudiante()
     {
-        return $this->belongsTo(Estudiante::class, 'estudiante_id');
+        return $this->belongsTo(Estudiante::class, 'estudiante_ci');
     }
+      public function carrera()
+    {
+        return $this->belongsTo(Estudiante::class, 'estudiante_ci');
+    }
+
+    
 }

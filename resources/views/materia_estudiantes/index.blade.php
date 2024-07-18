@@ -49,6 +49,8 @@
                             <th>FECHA</th>
                             <th>ESTUDIANTE</th>
                             <th>GRUPO</th>
+                            <th>NOTA FINAL</th>
+                            <th>ESTADO DE PAGO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
@@ -59,6 +61,37 @@
                             <td>{{ $materiaEstudiante->estudiante->nombre }}</td>
                             <td>{{ $materiaEstudiante->grupoMateria->sigla }}-{{ $materiaEstudiante->grupoMateria->descripcion }}</td>
                             <td>
+                                <form action="{{ route('update-nota') }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    @if ($materiaEstudiante->notas->isNotEmpty())
+                                    <input type="number" name="nota_final" class="form-control" value="{{ $materiaEstudiante->notas[0]->nota_final }}" onchange="this.form.submit()">
+                                    @else
+                                    <input type="hidden" name="materia_estudiante_id" value="{{ $materiaEstudiante->id }}">
+                                    <input type="number" name="nota_final" class="form-control" value="0" onchange="this.form.submit()">
+                                    @endif
+                                </form>
+
+                            </td>
+                            <td>
+                                @if ($materiaEstudiante->pagos->isNotEmpty())
+                                <form action="pagos_materia" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="text" name="id" hidden value="{{$materiaEstudiante->pagos[0]->id}}">
+                                    <select name="estado" class="form-control" onchange="this.form.submit()">
+                                        <option value="procesando" {{ $materiaEstudiante->pagos[0]->estado == 'procesando' ? 'selected' : '' }}>Procesando</option>
+                                        <option value="pagado" {{ $materiaEstudiante->pagos[0]->estado == 'pagado' ? 'selected' : '' }}>Pagado</option>
+                                    </select>
+                                </form>
+                                @else
+                                No hay pagos registrados
+                                @endif
+                            <td>
+                                <a href="{{ route('notas.index', $materiaEstudiante->id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Ver Calificación">
+                                    <i class="fas fa-star"></i>
+                                </a>
+
                                 <a href="{{ route('materia_estudiantes.show', $materiaEstudiante->id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
                                     <i class="fas fa-eye"></i>
                                 </a>

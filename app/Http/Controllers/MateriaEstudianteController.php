@@ -24,9 +24,11 @@ class MateriaEstudianteController extends Controller
 
         $grupos = GrupoMateria::all();
         $materiasEstudiantes  = MateriaEstudiante::all();
+
+
         $estudiantes = Estudiante::all();
 
-
+ 
         return view('materia_estudiantes.index', compact('grupos', 'materiasEstudiantes', 'estudiantes', 'visitas'));
     }
 

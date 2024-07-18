@@ -21,87 +21,86 @@ class DatabaseSeeder extends Seeder
     {
 
 
-        Tematica::factory()->create(['nombre' => 'Dia']);
-        Tematica::factory()->create(['nombre' => 'Noche']);
-        Tematica::factory()->create(['nombre' => 'Niño']);
-        Tematica::factory()->create(['nombre' => 'Joven']);
-        Tematica::factory()->create(['nombre' => 'Adulto']);
-        // Top-level menu
-        $usuarios = Menu::create(['name' => 'Gestión de Usuarios', 'icon' => 'fas fa-users', 'order' => 1, 'parent_id' => 0,]);
-        $gestiones = Menu::create(['name' => 'Gestión de Gestiones', 'icon' => 'fas fa-calendar-alt', 'order' => 2, 'parent_id' => 0,]);
-        $materias = Menu::create(['name' => 'Gestión de Materias', 'icon' => 'fas fa-book', 'order' => 3, 'parent_id' => 0,]);
-        $carreras = Menu::create(['name' => 'Gestión de Carreras', 'icon' => 'fas fa-graduation-cap', 'order' => 4, 'parent_id' => 0,]);
-        $ofertas = Menu::create(['name' => 'Gestión de Ofertas', 'icon' => 'fas fa-clipboard-list', 'order' => 5, 'parent_id' => 0,]);
-        $inscripciones = Menu::create(['name' => 'Gestión de Inscripciones', 'icon' => 'fas fa-user-check', 'order' => 6, 'parent_id' => 0,]);
-        $pagos = Menu::create(['name' => 'Gestión de Pagos', 'icon' => 'fas fa-money-bill-wave', 'order' => 7, 'parent_id' => 0,]);
-        $reportes = Menu::create(['name' => 'Reportes y Estadísticas', 'icon' => 'fas fa-chart-bar', 'order' => 8, 'parent_id' => 0,]);
-        $configuraciones = Menu::create(['name' => 'Configuración', 'icon' => 'fas fa-cog', 'order' => 9, 'parent_id' => 0,]);
+        // Tematica::factory()->create(['nombre' => 'Dia']);
+        // Tematica::factory()->create(['nombre' => 'Noche']);
+        // Tematica::factory()->create(['nombre' => 'Niño']);
+        // Tematica::factory()->create(['nombre' => 'Joven']);
+        // Tematica::factory()->create(['nombre' => 'Adulto']);
+        // // Top-level menu
+        // $usuarios = Menu::create(['name' => 'Gestión de Usuarios', 'icon' => 'fas fa-users', 'order' => 1, 'parent_id' => 0,]);
+        // $gestiones = Menu::create(['name' => 'Gestión de Gestiones', 'icon' => 'fas fa-calendar-alt', 'order' => 2, 'parent_id' => 0,]);
+        // $materias = Menu::create(['name' => 'Gestión de Materias', 'icon' => 'fas fa-book', 'order' => 3, 'parent_id' => 0,]);
+        // $carreras = Menu::create(['name' => 'Gestión de Carreras', 'icon' => 'fas fa-graduation-cap', 'order' => 4, 'parent_id' => 0,]);
+        // $ofertas = Menu::create(['name' => 'Gestión de Ofertas', 'icon' => 'fas fa-clipboard-list', 'order' => 5, 'parent_id' => 0,]);
+        // $inscripciones = Menu::create(['name' => 'Gestión de Inscripciones', 'icon' => 'fas fa-user-check', 'order' => 6, 'parent_id' => 0,]);
+        // $pagos = Menu::create(['name' => 'Gestión de Pagos', 'icon' => 'fas fa-money-bill-wave', 'order' => 7, 'parent_id' => 0,]);
+        // $reportes = Menu::create(['name' => 'Reportes y Estadísticas', 'icon' => 'fas fa-chart-bar', 'order' => 8, 'parent_id' => 0,]);
+        // $configuraciones = Menu::create(['name' => 'Configuración', 'icon' => 'fas fa-cog', 'order' => 9, 'parent_id' => 0,]);
 
-        // Submenu items
-        $this->createSubMenu($usuarios, 'Crear Usuario', 'usuarios/create', 'fas fa-user-plus');
-        $this->createSubMenu($usuarios, 'Listar Usuarios', 'usuarios', 'fas fa-users');
-        $this->createSubMenu($usuarios, 'Estudiantes', 'estudiantes', 'fas fa-user-graduate');
-        $this->createSubMenu($usuarios, 'Docentes', 'docentes', 'fas fa-chalkboard-teacher');
-        $this->createSubMenu($usuarios, 'Administrativos', 'administrativos', 'fas fa-user-tie');
+        // // Submenu items
+        // $this->createSubMenu($usuarios, 'Crear Usuario', 'usuarios/create', 'fas fa-user-plus');
+        // $this->createSubMenu($usuarios, 'Listar Usuarios', 'usuarios', 'fas fa-users');
+        // $this->createSubMenu($usuarios, 'Estudiantes', 'estudiantes', 'fas fa-user-graduate');
+        // $this->createSubMenu($usuarios, 'Docentes', 'docentes', 'fas fa-chalkboard-teacher');
+        // $this->createSubMenu($usuarios, 'Administrativos', 'administrativos', 'fas fa-user-tie');
 
-        $this->createSubMenu($gestiones, 'Crear Gestión', 'gestiones/create', 'fas fa-calendar-plus');
-        $this->createSubMenu($gestiones, 'Listar Gestiones', 'gestiones', 'fas fa-calendar-alt');
+        // $this->createSubMenu($gestiones, 'Crear Gestión', 'gestiones/create', 'fas fa-calendar-plus');
+        // $this->createSubMenu($gestiones, 'Listar Gestiones', 'gestiones', 'fas fa-calendar-alt');
 
-        $this->createSubMenu($materias, 'Crear Materia', 'materias/create', 'fas fa-book-medical');
-        $this->createSubMenu($materias, 'Listar Materias', 'materias', 'fas fa-book');
+        // $this->createSubMenu($materias, 'Crear Materia', 'materias/create', 'fas fa-book-medical');
+        // $this->createSubMenu($materias, 'Listar Materias', 'materias', 'fas fa-book');
 
-        $this->createSubMenu($carreras, 'Crear Carrera', 'carreras/create', 'fas fa-graduation-cap');
-        $this->createSubMenu($carreras, 'Listar Carreras', 'carreras', 'fas fa-list-alt');
-        $this->createSubMenu($carreras, 'Niveles', 'niveles', 'fas fa-layer-group');
-        $this->createSubMenu($carreras, 'Grupos', 'grupo_materias', 'fas fa-users-cog');
-        $this->createSubMenu($carreras, 'Horarios', 'horarios', 'fas fa-clock');
+        // $this->createSubMenu($carreras, 'Crear Carrera', 'carreras/create', 'fas fa-graduation-cap');
+        // $this->createSubMenu($carreras, 'Listar Carreras', 'carreras', 'fas fa-list-alt');
+        // $this->createSubMenu($carreras, 'Niveles', 'niveles', 'fas fa-layer-group');
+        // $this->createSubMenu($carreras, 'Grupos', 'grupo_materias', 'fas fa-users-cog');
+        // $this->createSubMenu($carreras, 'Horarios', 'horarios', 'fas fa-clock');
 
-        $this->createSubMenu($ofertas, 'Crear Oferta', 'ofertas/create', 'fas fa-plus-square');
-        $this->createSubMenu($ofertas, 'Listar Ofertas', 'ofertas', 'fas fa-th-list');
+        // $this->createSubMenu($ofertas, 'Crear Oferta', 'ofertas/create', 'fas fa-plus-square');
+        // $this->createSubMenu($ofertas, 'Listar Ofertas', 'ofertas', 'fas fa-th-list');
 
-        $this->createSubMenu($inscripciones, 'Crear Inscripción', 'inscripciones/create', 'fas fa-plus-square');
-        $this->createSubMenu($inscripciones, 'Listar Inscripciones', 'inscripciones', 'fas fa-list');
-        $this->createSubMenu($inscripciones, 'Inscribir Carrera', 'carrera_estudiantes', 'fas fa-graduation-cap');
-        $this->createSubMenu($inscripciones, 'Inscribir Materia', 'materia_estudiantes', 'fas fa-book');
+        // $this->createSubMenu($inscripciones, 'Crear Inscripción', 'inscripciones/create', 'fas fa-plus-square');
+        // $this->createSubMenu($inscripciones, 'Listar Inscripciones', 'inscripciones', 'fas fa-list');
+        // $this->createSubMenu($inscripciones, 'Inscribir Carrera', 'carrera_estudiantes', 'fas fa-graduation-cap');
+        // $this->createSubMenu($inscripciones, 'Inscribir Materia', 'materia_estudiantes', 'fas fa-book');
 
-        $this->createSubMenu($pagos, 'Crear Pago', 'pagos/create', 'fas fa-money-check-alt');
-        $this->createSubMenu($pagos, 'Listar Pagos', 'pagos', 'fas fa-money-bill-wave');
-        $this->createSubMenu($pagos, 'Pagar QR', 'pagos/qr', 'fas fa-qrcode');
-        $this->createSubMenu($pagos, 'Pagos por QR', 'pagos/lista-qr', 'fas fa-receipt');
-        $this->createSubMenu($pagos, 'Crear Egreso', 'egresos/create', 'fas fa-comment-dollar');
-        $this->createSubMenu($pagos, 'Listar Egresos', 'egresos', 'fas fa-file-invoice-dollar');
+        // $this->createSubMenu($pagos, 'Crear Pago', 'pagos/create', 'fas fa-money-check-alt');
+        // $this->createSubMenu($pagos, 'Listar Pagos', 'pagos', 'fas fa-money-bill-wave');
+        // $this->createSubMenu($pagos, 'Pagar QR', 'pagos/qr', 'fas fa-qrcode');
+        // $this->createSubMenu($pagos, 'Pagos por QR', 'pagos/lista-qr', 'fas fa-receipt');
+        // $this->createSubMenu($pagos, 'Crear Egreso', 'egresos/create', 'fas fa-comment-dollar');
+        // $this->createSubMenu($pagos, 'Listar Egresos', 'egresos', 'fas fa-file-invoice-dollar');
        
     
-        $this->createSubMenu($reportes, 'Crear Reporte', 'reportes/create', 'fas fa-file-alt');
-        $this->createSubMenu($reportes, 'Listar Reportes', 'reportes', 'fas fa-chart-line');
-        $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas/estudiantes', 'fas fa-chart-pie');
+        // $this->createSubMenu($reportes, 'Crear Reporte', 'reportes/create', 'fas fa-file-alt');
+        // $this->createSubMenu($reportes, 'Listar Reportes', 'reportes', 'fas fa-chart-line');
+        // $this->createSubMenu($reportes, 'Ver Estadísticas', 'estadisticas/estudiantes', 'fas fa-chart-pie');
 
-        $this->createSubMenu($configuraciones, 'Permisos', 'permisos', 'fas fa-user-shield');
-        $this->createSubMenu($configuraciones, 'Roles', 'roles', 'fas fa-user-tag');
-
-
+        // $this->createSubMenu($configuraciones, 'Permisos', 'permisos', 'fas fa-user-shield');
+        // $this->createSubMenu($configuraciones, 'Roles', 'roles', 'fas fa-user-tag');
 
 
 
 
 
-        // 1. Create the admin role if it doesn't exist
-        $adminRole = Role::firstOrCreate(['nombre' => 'admin']);
-        $adminRole2 = Role::firstOrCreate(['nombre' => 'docente']);
-        $adminRole3 = Role::firstOrCreate(['nombre' => 'estudiante']);
 
-        // 2. Get all menu IDs
-        $menuIds = Menu::pluck('id')->toArray();
 
-        foreach ($menuIds as $menuId) {
-            RoleMenu::create([
-                'role_id' => $adminRole->id,
-                'menu_id' => $menuId,
-            ]);
-        }
+        // // 1. Create the admin role if it doesn't exist
+        // $adminRole = Role::firstOrCreate(['nombre' => 'admin']);
+        // $adminRole2 = Role::firstOrCreate(['nombre' => 'docente']);
+        // $adminRole3 = Role::firstOrCreate(['nombre' => 'estudiante']);
 
-        $this->call(UserSeeder::class);
-        // \App\Models\User::factory(10)->create();
+        // // 2. Get all menu IDs
+        // $menuIds = Menu::pluck('id')->toArray();
+
+        // foreach ($menuIds as $menuId) {
+        //     RoleMenu::create([
+        //         'role_id' => $adminRole->id,
+        //         'menu_id' => $menuId,
+        //     ]);
+        // }
+
+     
 
         DB::table('usuarios')->insert([
             [

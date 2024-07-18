@@ -10,7 +10,7 @@ class MateriaEstudiante extends Model
     use HasFactory;
 
     // Especifica la tabla si el nombre no sigue la convención plural
-    protected $table = 'materia_estudiante';
+    protected $table = 'estudiante_materia';
     protected $fillable = [
         'fecha',
         'grupos_materias_sigla',
@@ -26,4 +26,14 @@ class MateriaEstudiante extends Model
     {
         return $this->belongsTo(Estudiante::class, 'estudiante_ci', 'ci');
     }
+     public function notas() 
+    {
+        return $this->hasMany(Nota::class, 'estudiante_materia_id', 'id');
+    } 
+     public function pagos() 
+    {
+        return $this->hasMany(Nota::class, 'estudiante_materia_id', 'id');
+    }
+
+    
 }

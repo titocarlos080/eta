@@ -25,4 +25,10 @@ class CarreraEstudiante extends Model
     {
         return $this->belongsTo(Carrera::class, 'carrera_sigla', 'sigla');
     }
+ public function pagos()
+    {
+        return $this->hasMany(PagoCarrera::class, 'carrera_estudiante_id', 'id');
+    }
+
+
 }
