@@ -74,6 +74,7 @@
                                 <label class="form-control-label px-3">Total</label>
                                 <input type="text" name="taPedidoDetalle[0][Total]" placeholder="">
                             </div>
+                              
                         </div>
                         <div class="row justify-content-end">
                             <div class="form-group col-sm-6">
@@ -88,6 +89,7 @@
                     <iframe name="QrImage" style="width: 100%; height: 495px;"></iframe>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

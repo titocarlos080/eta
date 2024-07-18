@@ -1,12 +1,4 @@
- -- Tabla gestiones
-CREATE TABLE gestiones (
-    codigo SERIAL PRIMARY KEY,
-    descripcion VARCHAR(255),
-    fecha_inicio DATE,
-    fecha_fin DATE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+
 
 -- Tabla menus
 CREATE TABLE menus (
@@ -14,11 +6,11 @@ CREATE TABLE menus (
     name VARCHAR(255),
     url VARCHAR(255),
     icon VARCHAR(255),
-    parent_id BIGINT,
-    "order" INTEGER DEFAULT 0,
+    parent_id BIGINT  ,
+    orden INTEGER DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (parent_id) REFERENCES menus(id) ON DELETE CASCADE
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  
 );
 
 -- Tabla tematicas
@@ -45,6 +37,7 @@ CREATE TABLE roles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- Tabla role_menus
 CREATE TABLE role_menus (
@@ -86,12 +79,32 @@ CREATE TABLE docentes (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
-
+CREATE TABLE administrativos (
+    ci VARCHAR(20) NOT NULL PRIMARY KEY,
+    nombre VARCHAR(255)   NULL,
+    apellido_pat VARCHAR(255)    ,
+    apellido_mat VARCHAR(255)    ,
+    telefono VARCHAR(255)  ,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    sexo CHAR(1) CHECK (sexo IN ('M', 'F')),
+    fecha_nacimiento VARCHAR    ,
+    usuario_id INT NOT NULL,
+     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+  
+);
 -- Tabla niveles
 CREATE TABLE niveles (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255)
 );
+CREATE TABLE gestiones (
+    codigo SERIAL PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL,
+    fecha_inicio DATE ,
+    fecha_fin DATE
+ );
 
 -- Tabla carreras
 CREATE TABLE carreras (
@@ -203,6 +216,13 @@ CREATE TABLE estudiante_materia (
     FOREIGN KEY (estudiante_ci) REFERENCES estudiantes(ci) ON DELETE CASCADE
 );
 
+CREATE TABLE notas (
+    id SERIAL PRIMARY KEY,
+    nota_final NUMERIC(5, 2) NOT NULL CHECK (nota_final >= 1 AND nota_final <= 100),
+    estudiante_materia_id INT NOT NULL, 
+     FOREIGN KEY(estudiante_materia_id) REFERENCES estudiante_materia(id)
+ );
+
 -- Tabla dias
 CREATE TABLE dias (
     id SERIAL PRIMARY KEY,
@@ -223,4 +243,30 @@ CREATE TABLE grupo_materia_horarios (
     FOREIGN KEY (horario_id) REFERENCES horarios(id) ON DELETE CASCADE,
     FOREIGN KEY (dia_id) REFERENCES dias(id) ON DELETE CASCADE
 );
+
+
+CREATE TABLE pago_materias (
+    id SERIAL PRIMARY KEY,
+    monto DECIMAL(10,2) NOT NULL,
+    fecha DATE NOT NULL,
+    concepto VARCHAR(255) NOT NULL,
+    estado VARCHAR(50),
+    estudiante_materia_id INT NOT NULL, 
+     FOREIGN KEY(estudiante_materia_id) REFERENCES estudiante_materia(id)
+ 
+);
+CREATE TABLE pago_carreras (
+    id SERIAL PRIMARY KEY,
+    monto DECIMAL(10,2) NOT NULL,
+    fecha DATE NOT NULL,
+    concepto VARCHAR(255) NOT NULL,
+    estado VARCHAR(50),
+    carrera_estudiante_id INT NOT NULL, 
+    FOREIGN KEY(carrera_estudiante_id) REFERENCES carrera_estudiantes(id)
+ 
+);
+ 
+
+
+
 

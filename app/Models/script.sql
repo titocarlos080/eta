@@ -287,15 +287,27 @@ CREATE TABLE notas (
 
  
 
-CREATE TABLE pagos (
+CREATE TABLE pago_materias (
     id SERIAL PRIMARY KEY,
     monto DECIMAL(10,2) NOT NULL,
     fecha DATE NOT NULL,
     concepto VARCHAR(255) NOT NULL,
+    estado VARCHAR(50),
     estudiante_materia_id INT NOT NULL, 
-     FOREIGN KEY(estudiante_materia_id) REFERENCES estudiante_materia(id)
+    FOREIGN KEY(estudiante_materia_id) REFERENCES estudiante_materia(id)
  
- );
+);
+
+CREATE TABLE pago_carreras (
+    id SERIAL PRIMARY KEY,
+    monto DECIMAL(10,2) NOT NULL,
+    fecha DATE NOT NULL,
+    concepto VARCHAR(255) NOT NULL,
+    estado VARCHAR(50),
+    carrera_estudiante_id INT NOT NULL, 
+    FOREIGN KEY(carrera_estudiante_id) REFERENCES carrera_estudiantes(id)
+ 
+);
  
  CREATE TABLE egresos (
     id SERIAL PRIMARY KEY,

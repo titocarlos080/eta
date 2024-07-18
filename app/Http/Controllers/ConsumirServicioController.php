@@ -2,26 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarreraEstudiante;
+use App\Models\PagoCarrera;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
 class ConsumirServicioController extends Controller
 {
     public function RecolectarDatos(Request $request)
-    { 
+    {
+         
+         
         try {
             $lcComerceID           = "d029fa3a95e174a19934857f535eb9427d967218a36ea014b70ad704bc6c8d1c";
             $lnMoneda              = 2;
-            $lnTelefono            = $request->tnTelefono;
-            $lcNombreUsuario       = $request->tcRazonSocial;
-            $lnCiNit               = $request->tcCiNit;
-            $lcNroPago             = "UAGRM-SC-GRUPO1-1"     ;
-            $lnMontoClienteEmpresa = $request->tnMonto;
-            $lcCorreo              = $request->tcCorreo;
+            $lnTelefono            =  67769632;
+            $lcNombreUsuario       = 'tito carlos';
+            $lnCiNit               = 123456789;
+            $lcNroPago             = "venta-".$request->id;
+            $lnMontoClienteEmpresa = 0.1;
+            $lcCorreo              = 'tito@gmail.com';
             $lcUrlCallBack         = "http://localhost:8000/";
             $lcUrlReturn           = "http://localhost:8000/";
             $laPedidoDetalle       = $request->taPedidoDetalle;
             $lcUrl                 = "";
+
+
+
+            $monto = array_sum(array_column($laPedidoDetalle, 'Total'));
+
+ 
 
             $loClient = new Client();
 
@@ -32,7 +42,8 @@ class ConsumirServicioController extends Controller
             }
 
             $laHeader = [
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
+ 
             ];
 
             $laBody   = [
@@ -49,20 +60,39 @@ class ConsumirServicioController extends Controller
                 'taPedidoDetalle'       => $laPedidoDetalle
             ];
 
+           
             $loResponse = $loClient->post($lcUrl, [
                 'headers' => $laHeader,
                 'json' => $laBody
             ]);
-
+          
             $laResult = json_decode($loResponse->getBody()->getContents());
+ 
 
             if ($request->tnTipoServicio == 1) {
 
                 $laValues = explode(";", $laResult->values)[1];
            
-
+      
                 $laQrImage = "data:image/png;base64," . json_decode($laValues)->qrImage;
+
+                $materiaEstudiante = CarreraEstudiante::find($request->id);
+               
+                $carreraEstudianteId = $request->id;
+            
+                PagoCarrera::create([
+                    'fecha' => now()->format('Y-m-d'),
+                    'monto' => $monto ,
+                    'concepto' => $request->concepto,
+                    'carrera_estudiante_id' => $carreraEstudianteId,
+                    'estado' => 'procesando'
+                ]);
+            
                 echo '<img src="' . $laQrImage . '" alt="Imagen base64">';
+
+
+
+
             } elseif ($request->tnTipoServicio == 2) {
 
              

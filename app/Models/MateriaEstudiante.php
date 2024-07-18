@@ -26,4 +26,14 @@ class MateriaEstudiante extends Model
     {
         return $this->belongsTo(Estudiante::class, 'estudiante_ci', 'ci');
     }
+     public function notas() 
+    {
+        return $this->hasMany(Nota::class, 'estudiante_materia_id', 'id');
+    } 
+     public function pagos() 
+    {
+        return $this->hasMany(Nota::class, 'estudiante_materia_id', 'id');
+    }
+
+    
 }

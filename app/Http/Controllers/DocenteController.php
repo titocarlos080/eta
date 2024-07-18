@@ -12,11 +12,12 @@ class DocenteController extends Controller
 {
     // Muestra la lista de docentes
     public function index()
-    {     Pagina::contarPagina(request()->path());
+    {
+        Pagina::contarPagina(request()->path());
         $pagina = Pagina::where('path', request()->path())->first();
         $visitas = $pagina ? $pagina->visitas : 0;
         $docentes = Docente::all(); // Obtiene todos los docentes
-        return view('docentes.index', compact('docentes','visitas'));
+        return view('docentes.index', compact('docentes', 'visitas'));
     }
 
     // Muestra el formulario para crear un nuevo docente
@@ -29,7 +30,7 @@ class DocenteController extends Controller
     public function store(Request $request)
     {
 
-        
+
         // Valida los datos del formulario
         $request->validate([
             'ci' => 'required|string|max:20|unique:docentes,ci',
@@ -39,7 +40,7 @@ class DocenteController extends Controller
             'email' => 'required|email|unique:docentes,email',
             'kardex' => 'nullable|string|max:255',
             'curriculum' => 'nullable|string|max:255',
-         ]);
+        ]);
 
         try {
             // Crea el usuario asociado
@@ -47,8 +48,8 @@ class DocenteController extends Controller
                 'name' => $request->nombre,
                 'email' => $request->email,
                 'password' => Hash::make($request->ci), // Usa la contraseña ingresada
-                'rol_id' => 2, 
-                'tematica_id' => 1, 
+                'rol_id' => 2,
+                'tematica_id' => 1,
             ]);
 
             // Crea el docente asociado al usuario
@@ -57,6 +58,8 @@ class DocenteController extends Controller
             return redirect()->route('docentes.index')
                 ->with('success', 'Docente registrado exitosamente.');
         } catch (\Exception $e) {
+
+            
             // Redirige de vuelta con un mensaje de error
             return redirect()->back()
                 ->with('error', 'Error al registrar el docente. Por favor, intente de nuevo.')

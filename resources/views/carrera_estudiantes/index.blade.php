@@ -45,6 +45,7 @@
                             <th>FECHA DE INSCRIPCIÓN</th>
                             <th> ESTUDIANTE</th>
                             <th>SIGLA DE LA CARRERA</th>
+                            <th>ESTADO DE PAGO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
@@ -55,6 +56,26 @@
                             <td>{{ $carreraEstudiante->estudiante_ci }}-{{ $carreraEstudiante->estudiante->nombre }}</td>
                             <td>{{ $carreraEstudiante->carrera_sigla }}- {{ $carreraEstudiante->carrera->descripcion }}</td>
                             <td>
+                                @if ($carreraEstudiante->pagos->isNotEmpty())
+                                <form action="pagos_carrera" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="text" name="id" hidden value="{{$carreraEstudiante->pagos[0]->id}}">
+                                    <select name="estado" class="form-control" onchange="this.form.submit()">
+                                        <option value="procesando" {{ $carreraEstudiante->pagos[0]->estado == 'procesando' ? 'selected' : '' }}>Procesando</option>
+                                        <option value="pagado" {{ $carreraEstudiante->pagos[0]->estado == 'pagado' ? 'selected' : '' }}>Pagado</option>
+                                    </select>
+                                </form>
+                                @else
+                                No hay pagos registrados
+                                @endif
+                            </td>
+                            <td>
+                                @if ($carreraEstudiante->pagos->isEmpty() || $carreraEstudiante->pagos[0]->estado != 'pagado')
+                                <a href="/pagos_carrera/{{ $carreraEstudiante->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver Pago Materias">
+                                    <i class="fas fa-money-check-alt"></i>
+                                </a>
+                                @endif
                                 <a href="{{ route('carrera_estudiantes.show', $carreraEstudiante->id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Ver">
                                     <i class="fas fa-eye"></i>
                                 </a>
