@@ -8,6 +8,7 @@ use App\Models\Gestion;
 use App\Models\GrupoMateria;
 use App\Models\Materia;
 use App\Models\Oferta;
+use App\Models\Pagina;
 use Illuminate\Http\Request;
 
 class OfertaController extends Controller
@@ -19,59 +20,72 @@ class OfertaController extends Controller
      */
     public function index()
     {
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $gestiones = Gestion::all();
-         return view('ofertas.index', compact('gestiones'));
+        return view('ofertas.index', compact('gestiones','visitas'));
     }
+
     public function showCarreras($gestionCodigo)
-{
-    $gestion = Gestion::find($gestionCodigo);
+    {
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+        $gestion = Gestion::find($gestionCodigo);
 
-    if (!$gestion) {
-        return redirect()->route('ofertas.index')->with('error', 'Gestión no encontrada.');
+        if (!$gestion) {
+            return redirect()->route('ofertas.index')->with('error', 'Gestión no encontrada.');
+        }
+
+        $carreras = Carrera::where('gestion_codigo', $gestionCodigo)->get();
+        return view('ofertas.carreras', compact('carreras', 'gestion','visitas'));
     }
 
-    $carreras = Carrera::where('gestion_codigo', $gestionCodigo)->get();
-    return view('ofertas.carreras', compact('carreras', 'gestion'));
-}
+    public function showMaterias(Request $request, $carreraSigla)
+    {
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
+        $search = $request->get('search');
+        $carrera = Carrera::where('sigla', $carreraSigla)->firstOrFail();
 
-    
+        $materias = Materia::join('grupo_materias', 'materias.sigla', '=', 'grupo_materias.materia_sigla')
+            ->join('docentes', 'grupo_materias.docente_ci', '=', 'docentes.ci')
+            ->where('grupo_materias.carrera_sigla', $carreraSigla)
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($q) use ($search) {
+                    $q->where('materias.descripcion', 'like', "%{$search}%")
+                        ->orWhere('grupo_materias.descripcion', 'like', "%{$search}%")
+                        ->orWhere('docentes.nombre', 'like', "%{$search}%")
+                        ->orWhere('docentes.apellido_pat', 'like', "%{$search}%")
+                        ->orWhere('docentes.apellido_mat', 'like', "%{$search}%");
+                });
+            })
+            ->select(
+                'materias.sigla as materia_sigla',
+                'materias.descripcion as materia_descripcion',
+                'grupo_materias.descripcion as grupo_descripcion',
+                'docentes.nombre as docente_nombre',
+                'docentes.apellido_pat as docente_apellido_pat',
+                'docentes.apellido_mat as docente_apellido_mat'
+            )
+            ->get();
 
-public function showMaterias(Request $request, $carreraSigla)
-{
-    $search = $request->get('search');
-    $materias = Materia::join('grupo_materias', 'materias.sigla', '=', 'grupo_materias.materia_sigla')
-        ->join('docentes', 'grupo_materias.docente_ci', '=', 'docentes.ci')
-        ->where('grupo_materias.carrera_sigla', $carreraSigla)
-        ->when($search, function ($query, $search) {
-            return $query->where(function ($q) use ($search) {
-                $q->where('materias.descripcion', 'like', "%{$search}%")
-                    ->orWhere('grupo_materias.descripcion', 'like', "%{$search}%")
-                    ->orWhere('docentes.nombre', 'like', "%{$search}%")
-                    ->orWhere('docentes.apellido_pat', 'like', "%{$search}%")
-                    ->orWhere('docentes.apellido_mat', 'like', "%{$search}%");
-            });
-        })
-        ->select(
-            'materias.sigla as materia_sigla',
-            'materias.descripcion as materia_descripcion',
-            'grupo_materias.descripcion as grupo_descripcion',
-            'docentes.nombre as docente_nombre',
-            'docentes.apellido_pat as docente_apellido_pat',
-            'docentes.apellido_mat as docente_apellido_mat'
-        )
-        ->get();
-
-    return view('ofertas.materias', compact('materias', 'search'));
-}
+        return view('ofertas.materias', compact('carrera', 'materias', 'search', 'visitas'));
+    }
 
     public function create()
     {
+        Pagina::contarPagina(request()->path());
+        $pagina = Pagina::where('path', request()->path())->first();
+        $visitas = $pagina ? $pagina->visitas : 0;
         $gestiones = Gestion::all();
         $carreras = Carrera::all();
         $materias = Materia::all();
         $grupos = GrupoMateria::all();
         $docentes = Docente::all();
-        return view('ofertas.create', compact('gestiones', 'carreras', 'materias', 'grupos', 'docentes'));
+        return view('ofertas.create', compact('gestiones', 'carreras', 'materias', 'grupos', 'docentes','visitas'));
     }
 
     public function store(Request $request)

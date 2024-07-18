@@ -12,7 +12,7 @@ class Gestion extends Model
     protected $table = 'gestiones';
 
     protected $primaryKey = 'codigo';
-
+    public $timestamps = false;
     protected $fillable = [
         'descripcion',
         'fecha_inicio',
